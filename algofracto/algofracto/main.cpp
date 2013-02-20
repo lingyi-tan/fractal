@@ -42,9 +42,9 @@ int main(int argc, const char * argv[])
     
     
     // main part
-    double * coeff = NULL;
+    double* coeff = NULL;
     // test of contrCoeff
-    coeff = contrCoeff(coeff);
+    coeff = fractal::contrCoeff(coeff);
     cout<<"coeff:";
     //for (int i = 0; i <PMAX; i++)    cout<<coeff[i]<<", ";
     double * cor = NULL;
@@ -52,13 +52,13 @@ int main(int argc, const char * argv[])
     cor[0] = 1; cor[1]=2;
     // test of linTrans
     for (int i = 0;  i < 30; i++) {
-        cor = linTrans(cor, 1, coeff);
+        cor = fractal::linTrans(cor, 1, coeff);
         cout<<"cordinates:"<<cor[0]<<","<<cor[1]<<endl;
     }    
     
     //test of fractalhit
     unsigned int * points = NULL;
-    points = fractalHit(points, 100, 100, 500, 20);
+    points = fractal::fractalHit(points, 100, 100, 500, 20);
     cout<<"points : ";
     for (int i = 0;  i < 30; i++) cout<<points[i]<<",";
     return 0;
