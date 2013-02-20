@@ -10,7 +10,24 @@
 #define __Flame_Fractal__PointSet__
 
 #include <iostream>
+#include <vector>
 #include "PointProcess.h"
 
+class PointSet {
+    int _height;
+    int _width;
+    int _Nsim;
+    float * _ppoints;
+    int * _phits;
+    float * _ppostPoints;
+    
+public:
+    PointSet(int, int, int);
+    ~PointSet();
+    void runProcess();
+    void pointReceiver(float *);
+    void arrange();
+    
+};
 
 #endif /* defined(__Flame_Fractal__PointSet__) */
