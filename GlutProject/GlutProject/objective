@@ -1,0 +1,18 @@
+
+Functions to be realized 
+
+1. viewing
+
+    1.1 resize the window (glutReshapeFunc, glViewport, glOrtho, glLoadIdentity)
+    1.2 zoom in and out, drag image
+    1.3 all that by keeping the level of detail unchanged (runtime fractal generating)
+
+2. pattern drawing
+    
+    2.1 define the growth path of fractals
+    2.2 impose limits on recurrance times, but modifiable depending on the viewing condition
+    2.3  
+
+3. fractal generating
+
+4. coloring
