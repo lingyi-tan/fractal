@@ -8,9 +8,7 @@
 
 #include "fractal.h"
 
-using namespace std;
-
-double * contrCoeff(double * coeff)
+double * fractal::contrCoeff(double * coeff)
 {
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
     std::default_random_engine generator(seed);
@@ -18,7 +16,7 @@ double * contrCoeff(double * coeff)
     auto runif = std::bind(distribution, generator);
     
     coeff = (double *) malloc(sizeof(double)*PMAX);
-    if (coeff == NULL) {cout<<"malloc failure"<<endl; return NULL;}
+    if (coeff == NULL) {std::cout<<"malloc failure"<<std::endl; return NULL;}
     for (int i = 0; i <= MIX; i++) {
         // rotation plus translation, no flip !!!
         double theta = runif()*2*PI; double mux = runif(); double muy = runif();
@@ -30,30 +28,30 @@ double * contrCoeff(double * coeff)
         coeff[i*6+5] = muy*UNIT;
     }
     return coeff;
-}
+};
 
 
-double * linTrans(double * loc, int k, double * coeff)
+double * fractal::linTrans(double * loc, int k, double * coeff)
 {
     if (k<0||k>MIX)
     {
-        cout<<"asking for unavailable transformation function!"<<endl;
+        std::cout<<"asking for unavailable transformation function!"<<std::endl;
         return NULL;
     }
     double result[2];
-
+    
     result[0] = coeff[k*6]*loc[1] + coeff[k*6+1]*loc[2] + coeff[k*6+2];
     result[1] = coeff[k*6+3]*loc[1] + coeff[k*6+4]*loc[2] + coeff[k*6+5];
     loc[0] = result[0];
     loc[1] = result[1];
     return loc;
-}
+};
 
-double * nonLinTrans(double * loc, int k)
+double * fractal::nonLinTrans(double * loc, int k)
 {
     if (k<0||k>MIX)
     {
-        cout<<"asking for unavailable transformation function!"<<endl;
+        std::cout<<"asking for unavailable transformation function!"<<std::endl;
         return NULL;
     }
     double result[2];
@@ -83,20 +81,20 @@ double * nonLinTrans(double * loc, int k)
             result[1] = 2*x*y/r;
             break;
         default:
-            cout<<"Beyond the scope of defined functions..."<<endl;
+            std::cout<<"Beyond the scope of defined functions..."<<std::endl;
             break;
     }
     
     loc[0] = result[0];
     loc[1] = result[1];
     return loc;
-
-}
-
-
+    
+};
 
 
-unsigned int * fractalHit (unsigned int * points, int xrange, int yrange, int sample, int iter)
+
+
+unsigned int * fractal::fractalHit (unsigned int * points, int xrange, int yrange, int sample, int iter)
 {
     // coefficients of linear transformation, outer and inner
     double * innerCoeff = nullptr;
@@ -128,7 +126,7 @@ unsigned int * fractalHit (unsigned int * points, int xrange, int yrange, int sa
         cor[0] = (index % xrange)/xrange - 0.5; //centralized cordinates of x-axis
         cor[1] = (index % yrange)/yrange - 0.5; //centralized cordinates of y-axis
         for (int step = -20; step < iter; step++)
-        {            
+        {
             cor = linTrans(cor, (int)(runif1()*MIX), innerCoeff); // inner linear transformation
             cor = nonLinTrans(cor, (int)(runif1()*MIX)); // variation, non linear
             cor = linTrans(cor, ((int)runif1()*MIX), outerCoeff ); // outer linear transformation
@@ -145,26 +143,5 @@ unsigned int * fractalHit (unsigned int * points, int xrange, int yrange, int sa
         
     }
     return points;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+};
 

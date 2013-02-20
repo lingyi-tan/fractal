@@ -27,14 +27,18 @@
 
 
 // initialize coefficients of contract linear transformations
-double * contrCoeff(double * coeff);
+class fractal{
+public:
+static double * contrCoeff(double * coeff);
 
-double * linTrans(double * loc, int k, double * coeff);
+static double * linTrans(double * loc, int k, double * coeff);
 
-double * nonLinTrans(double * loc, int k);
+static double * nonLinTrans(double * loc, int k);
 
 
 
-unsigned int * fractalHit(unsigned int * points, int xrange, int yrange, int sample, int iter);
+static unsigned int * fractalHit(unsigned int * points, int xrange, int yrange, int sample, int iter);
+};
 
 #endif /* defined(__algofracto__fractal__) */
+

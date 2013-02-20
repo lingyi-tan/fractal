@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B05CDA551695043C00240C07 /* fractal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B05CDA531695043C00240C07 /* fractal.cpp */; };
-		B0A2D38A1688A13700BE29E2 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B0A2D3891688A13700BE29E2 /* main.cpp */; };
-		B0A2D38C1688A13700BE29E2 /* GlutProject.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = B0A2D38B1688A13700BE29E2 /* GlutProject.1 */; };
+		18EB31A016D55A4B005C28B4 /* fractal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18EB319B16D55A4B005C28B4 /* fractal.cpp */; };
+		18EB31A116D55A4B005C28B4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 18EB319E16D55A4B005C28B4 /* main.cpp */; };
 		B0A2D3951688A15D00BE29E2 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A2D3941688A15D00BE29E2 /* GLUT.framework */; };
 		B0A2D3971688A49700BE29E2 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B0A2D3961688A49700BE29E2 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -21,21 +20,20 @@
 			dstPath = /usr/share/man/man1/;
 			dstSubfolderSpec = 0;
 			files = (
-				B0A2D38C1688A13700BE29E2 /* GlutProject.1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B05CDA531695043C00240C07 /* fractal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fractal.cpp; sourceTree = "<group>"; };
-		B05CDA541695043C00240C07 /* fractal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fractal.h; sourceTree = "<group>"; };
+		18EB319B16D55A4B005C28B4 /* fractal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = fractal.cpp; sourceTree = "<group>"; };
+		18EB319C16D55A4B005C28B4 /* fractal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = fractal.h; sourceTree = "<group>"; };
+		18EB319D16D55A4B005C28B4 /* GlutProject.1 */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.man; path = GlutProject.1; sourceTree = "<group>"; };
+		18EB319E16D55A4B005C28B4 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		18EB319F16D55A4B005C28B4 /* objective */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objective; sourceTree = "<group>"; };
 		B0A2D3851688A13700BE29E2 /* GlutProject */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = GlutProject; sourceTree = BUILT_PRODUCTS_DIR; };
-		B0A2D3891688A13700BE29E2 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
-		B0A2D38B1688A13700BE29E2 /* GlutProject.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = GlutProject.1; sourceTree = "<group>"; };
 		B0A2D3941688A15D00BE29E2 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		B0A2D3961688A49700BE29E2 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
-		B0A2D3981688A7EC00BE29E2 /* objective */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = objective; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,12 +49,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		18EB319A16D55A4B005C28B4 /* GlutProject */ = {
+			isa = PBXGroup;
+			children = (
+				18EB319B16D55A4B005C28B4 /* fractal.cpp */,
+				18EB319C16D55A4B005C28B4 /* fractal.h */,
+				18EB319D16D55A4B005C28B4 /* GlutProject.1 */,
+				18EB319E16D55A4B005C28B4 /* main.cpp */,
+				18EB319F16D55A4B005C28B4 /* objective */,
+			);
+			path = GlutProject;
+			sourceTree = "<group>";
+		};
 		B0A2D37A1688A13700BE29E2 = {
 			isa = PBXGroup;
 			children = (
+				18EB319A16D55A4B005C28B4 /* GlutProject */,
 				B0A2D3961688A49700BE29E2 /* OpenGL.framework */,
 				B0A2D3941688A15D00BE29E2 /* GLUT.framework */,
-				B0A2D3881688A13700BE29E2 /* GlutProject */,
 				B0A2D3861688A13700BE29E2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -67,18 +77,6 @@
 				B0A2D3851688A13700BE29E2 /* GlutProject */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B0A2D3881688A13700BE29E2 /* GlutProject */ = {
-			isa = PBXGroup;
-			children = (
-				B0A2D3891688A13700BE29E2 /* main.cpp */,
-				B05CDA531695043C00240C07 /* fractal.cpp */,
-				B05CDA541695043C00240C07 /* fractal.h */,
-				B0A2D3981688A7EC00BE29E2 /* objective */,
-				B0A2D38B1688A13700BE29E2 /* GlutProject.1 */,
-			);
-			path = GlutProject;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,8 +130,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B0A2D38A1688A13700BE29E2 /* main.cpp in Sources */,
-				B05CDA551695043C00240C07 /* fractal.cpp in Sources */,
+				18EB31A016D55A4B005C28B4 /* fractal.cpp in Sources */,
+				18EB31A116D55A4B005C28B4 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -163,9 +161,9 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				MACOSX_DEPLOYMENT_TARGET = "";
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
@@ -186,8 +184,8 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.8;
-				SDKROOT = macosx;
+				MACOSX_DEPLOYMENT_TARGET = "";
+				SDKROOT = "";
 			};
 			name = Release;
 		};
