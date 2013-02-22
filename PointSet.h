@@ -17,15 +17,15 @@ class PointSet {
     int _height;
     int _width;
     int _Nsim;
-    float * _ppoints;
+    numty * _ppoints;
     int * _phits;
-    float * _ppostPoints;
+    numty * _ppostPoints;
     
 public:
-    PointSet(int, int, int);
+    PointSet(int x, int y, int n); //initialization
     ~PointSet();
-    void runProcess();
-    void pointReceiver(float *);
+    void runProcess(); 
+    void pointReceiver(numty *);
     void arrange();
     
 };

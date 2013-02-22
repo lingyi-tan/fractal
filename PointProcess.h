@@ -12,4 +12,12 @@
 #include <iostream>
 #include "Transformation.h"
 
+class PointProcess {
+    numty * _xtraj;
+    numty * _ytraj;
+    int _steps;
+    
+    
+};
+
 #endif /* defined(__Flame_Fractal__PointProcess__) */
