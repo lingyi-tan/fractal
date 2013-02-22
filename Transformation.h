@@ -16,17 +16,17 @@
 class Transformation {
     Parameters * _ppara; // all transformation use the same set of parameters
     int _step;
-    numty _input[2];    // coordinates of input point
-    numty _interm[4];   // coordinates of intermediate results (one after preTrans, and one after nonLinTrans)
-    numty _output[2];   // coordinates of output point
+    std::vector<numty> _input;    // coordinates of input point
+    std::vector<numty> _interm;   // coordinates of intermediate results (one after preTrans, and one after nonLinTrans)
+    std::vector<numty> _output;   // coordinates of output point
 
 public:
     Transformation();
-    Transformation(const Parameters &);
+    Transformation(Parameters &);
     ~Transformation();
-    const numty * getOutPut();
-    const numty * getInput();
-    void push(const numty * );  //
+    const std::vector<numty> getOutPut();
+    const std::vector<numty> getInput();
+    void push(const std::vector<numty>);  //
     void preTrans();
     void nonLinTrans();
     void postTrans();

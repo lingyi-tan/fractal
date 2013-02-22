@@ -22,13 +22,24 @@ int main(int argc, char * argv[]){
     
     // 2. initialize transformation
     
-    Transformation newTrans;
-    
-    newTrans
+    Transformation newTrans(para);
     
     // 3. point process
+    std::vector<numty> point0{0.5,0.5};
+    newTrans.push(point0);
+    std::default_random_engine generator;
+    std::discrete_distribution<int> distribution(para.getProba().begin(), para.getProba().end());
+
+    newTrans.preTrans();
+    newTrans.nonLinTrans();
+    newTrans.postTrans();
+    int choose = distribution (generator);
+    std::vector<numty> point1;
+    point1= newTrans.getOutPut();
+    std::cout <<"choose: "<<choose;
+    std::cout<<point1[0]<<point1[1]<<std::endl;
     
-    // 4. point set
+  /*  // 4. point set
     
     // 5. draw
     
@@ -46,5 +57,5 @@ int main(int argc, char * argv[]){
         std::cout<<lulu[i]<<", ";
     }
     std::cout<<"\n"<<std::endl;
-    return 0;
+    return 0; */
 }

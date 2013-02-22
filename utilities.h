@@ -16,6 +16,7 @@
 
 #include <iostream>
 #include <random>
+#include <vector>
 
 typedef std::default_random_engine Rgen;
 typedef std::discrete_distribution<int> DiscFdr;
