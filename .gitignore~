@@ -1,0 +1,5 @@
+# Ignore the XCode project file
+*.xcodeproj
+GlutProject/.DS_Store
+algofracto/.DS_Store
+.DS_Store
