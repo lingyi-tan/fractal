@@ -7,3 +7,25 @@
 //
 
 #include "PointSet.h"
+
+PointSet::PointSet(int x, int y, int n){
+    _height = x;
+    _width = y;
+    _Nsim = n;
+}
+
+PointSet::~PointSet(){
+    
+}
+
+void PointSet::runProcess(){
+    
+}
+
+void PointSet::pointReceiver(numty *){
+    
+}
+
+void PointSet::arrange(){
+    
+}

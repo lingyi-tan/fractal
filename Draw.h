@@ -16,4 +16,14 @@
 #include "PointSet.h"
 #include "Parameters.h"
 
+class Draw{
+private:
+    numty * _ppostPoints;
+    
+public:
+    Draw(&PointSet);
+    ~Draw();
+    
+};
+
 #endif /* defined(__Flame_Fractal__Draw__) */
