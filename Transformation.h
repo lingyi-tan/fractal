@@ -24,8 +24,8 @@ public:
     Transformation();
     Transformation(Parameters &);
     ~Transformation();
-    const std::vector<numty> getOutPut();
-    const std::vector<numty> getInput();
+    std::vector<numty> getOutPut() const;
+    std::vector<numty> getInput() const;
     void push(const numty x, const numty y);  //
     void preTrans();
     void nonLinTrans(Rgen & engine);

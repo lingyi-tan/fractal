@@ -10,6 +10,7 @@
 #define __Flame_Fractal__Parameters__
 
 #include "NonLinTrans.h"
+#include "utilities.h"
 #include <vector>
 #include <iostream>
 #include <list>
@@ -28,11 +29,10 @@ public:
     void (* _nonLinTrans[12])(const numty, const numty, numty *) = {sinus, spheric, swirl, horseshoe, polar, hankerchief, heart, disc, spiral, hyperbolic, diamond, ex};
     
     void update(); // better way to exchange with iostream?
-    const std::vector<numty> getProba();
-    const int getCount();
-    const std::vector<numty> getPreTrans();
-    const std::vector<numty> getPostTrans();
-    bool isContract(bool isPreTrans);
+    std::vector<numty> getProba() const;
+    int getCount() const;
+    std::vector<numty> getPreTrans() const;
+    std::vector<numty> getPostTrans() const;
     
 };
 

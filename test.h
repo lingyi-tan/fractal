@@ -16,6 +16,10 @@
 #include "Transformation.h"
 #include "Parameters.h"
 #include "PointProcess.h"
+#include "output.h"
+
+//#include "QApplication"
+//#include "QPushButton"
 
 
 class Test{
@@ -23,6 +27,8 @@ public:
     void _test_vector();
     void _test_transform();
     void _test_pointProcess();
+    void _test_qt();
+    void _test_output();
 };
 
 #endif /* defined(__Flame_Fractal__test__) */

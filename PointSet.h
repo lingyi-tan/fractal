@@ -23,7 +23,7 @@ class PointSet {
 public:
     PointSet(int x, int y, int n); //initialization
     ~PointSet(); //
-    void runProcess();  //creates an object of the class PointProcess to do a recurrence in order to find a group of points to include in the graph
+    void runProcess(int iter, Rgen & gen, Parameters & par);  //creates an object of the class PointProcess to do a recurrence in order to find a group of points to include in the graph
     void pointReceiver(std::vector<numty>,std::vector<numty>); //receives positions of points to include
     void arrange(); //arranges the points in small boxes so that colour options could be applied
     std::vector<numty> getPointsX(); //provides the X values of the points

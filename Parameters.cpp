@@ -26,19 +26,19 @@ Parameters::Parameters(){
 
 Parameters::~Parameters(){}
 
-const int Parameters::getCount(){
+int Parameters::getCount() const {
     return _k;
 }
 
-const std::vector<numty> Parameters::getProba() {
+std::vector<numty> Parameters::getProba() const{
     return _prob;
 }
 
-const std::vector<numty> Parameters::getPreTrans(){
+std::vector<numty> Parameters::getPreTrans() const {
     return _preTrans;
 }
 
-const std::vector<numty> Parameters::getPostTrans(){
+std::vector<numty> Parameters::getPostTrans() const{
     return _postTrans;
 }
 

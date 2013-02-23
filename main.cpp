@@ -28,6 +28,7 @@ int main(int argc, char * argv[]){
     std::cout << "Hello, World\n";
     
     Test testNew;
+    
     //testNew._test_vector();
     
     
@@ -43,6 +44,8 @@ int main(int argc, char * argv[]){
     // 3. point process
    
     testNew._test_pointProcess();
+    
+     
    // 4. point set
     
 
