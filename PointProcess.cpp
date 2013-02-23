@@ -8,7 +8,6 @@
 
 #include "PointProcess.h"
 
-<<<<<<< HEAD
 #define MAXWALK 30
 #define NONPLOT 20
 
@@ -69,16 +68,4 @@ void PointProcess::start(int iter, Rgen & eng, Parameters & pparam){
         }
         
     }
-=======
-PointProcess::PointProcess(){
-    
-}
-
-PointProcess::~PointProcess(){
-    
-}
-
-void PointProcess::run(){
-    
->>>>>>> ca699032b77c17fa26f3458bf3b0260ae5c702ba
 }
