@@ -7,29 +7,22 @@
 //
 #include <iostream>
 #include <math.h>
+#include <boost/python/module.hpp>
 #include "Parameters.h"
 #include "Transformation.h"
 #include "NonLinTrans.h"
 #include "PointProcess.h"
+#include "PointSet.h"
 #include "test.h"
 
 int main(int argc, char * argv[]){
-        std::vector<int> foo (3,0);
-        std::vector<int> bar (5,0);
-        
-        bar = foo;
-        foo = std::vector<int>();
-        
-        std::cout << "Size of foo: " << int(foo.size()) << '\n';
-        std::cout << "Size of bar: " << int(bar.size()) << '\n';
-     
-
     
     std::cout << "Hello, World\n";
     
     Test testNew;
     
     //testNew._test_vector();
+    Rgen rgen;
     
     
     // 1. initialize parameters
@@ -39,7 +32,7 @@ int main(int argc, char * argv[]){
     
     // 2. initialize transformation
     
-    testNew._test_transform();
+//    testNew._test_transform();
     
     // 3. point process
    
@@ -47,6 +40,8 @@ int main(int argc, char * argv[]){
     
      
    // 4. point set
+    PointSet pointset(20000, rgen, para);
+    pointset.runProcess();
     
 
     // 5. draw

@@ -8,10 +8,10 @@
 
 #include "PointSet.h"
 
-PointSet::PointSet(int x, int y, int n){
-    _height = x;
-    _width = y;
+PointSet::PointSet(int n, Rgen &rgen, Parameters &para){
     _Nsim = n;
+    _rgen = rgen;
+    _para = para;
 }
 
 PointSet::~PointSet(){
@@ -21,7 +21,8 @@ PointSet::~PointSet(){
 void PointSet::runProcess(int iter, Rgen & gen, Parameters & par){
     for (int i = 0;i<_Nsim;i++){
         PointProcess point;
-        point.start(iter, gen, par);
+        point.start(_Nsim, _rgen, _para);
+        pointReceiver(point.getXcord(),point.getXcord());
     }
 }
 
@@ -30,10 +31,6 @@ void PointSet::pointReceiver(std::vector<numty> newPointsX,std::vector<numty> ne
         _prepointsX.push_back(newPointsX[i]);
         _prepointsY.push_back(newPointsY[i]);
     }
-}
-
-void PointSet::arrange(){
-    
 }
 
 std::vector<numty> PointSet::getPointsX(){
