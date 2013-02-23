@@ -7,3 +7,15 @@
 //
 
 #include "PointProcess.h"
+
+PointProcess::PointProcess(){
+    
+}
+
+PointProcess::~PointProcess(){
+    
+}
+
+void PointProcess::run(){
+    
+}

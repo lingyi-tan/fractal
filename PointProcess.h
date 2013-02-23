@@ -13,11 +13,15 @@
 #include "Transformation.h"
 
 class PointProcess {
+private:
     numty * _xtraj;
     numty * _ytraj;
     int _steps;
     
-    
+public:
+    PointProcess();
+    ~PointProcess();
+    void run();
 };
 
 #endif /* defined(__Flame_Fractal__PointProcess__) */

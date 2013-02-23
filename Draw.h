@@ -18,12 +18,18 @@
 
 class Draw{
 private:
-    numty * _ppostPoints;
+    std::vector<numty> _pprePointsX;
+    std::vector<numty> _pprePointsY;
+    std::vector<int> _hits; //to see later
+    std::vector<int> _postPoints; //to see later
     
 public:
-    Draw(&PointSet);
+    Draw(PointSet);
     ~Draw();
-    
+    void arrange();
+    void run();
+    void Reshape();
+    void Display();
 };
 
 #endif /* defined(__Flame_Fractal__Draw__) */
