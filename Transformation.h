@@ -26,11 +26,11 @@ public:
     ~Transformation();
     const std::vector<numty> getOutPut();
     const std::vector<numty> getInput();
-    void push(const std::vector<numty>);  //
+    void push(const numty x, const numty y);  //
     void preTrans();
-    void nonLinTrans();
-    void postTrans();
-    //void allTrans();
+    void nonLinTrans(Rgen & engine);
+    // void postTrans();
+    void multiTrans(Rgen & engine);
     
 };
 

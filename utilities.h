@@ -9,17 +9,24 @@
 #ifndef __Flame_Fractal__utilities__
 #define __Flame_Fractal__utilities__
 
-#define LEFT 0
+#define LEFT -1
 #define RIGHT 1
 #define TOP 1
-#define BOTTOM 0
+#define BOTTOM -1
 
 #include <iostream>
 #include <random>
 #include <vector>
+#include <math.h>
 
 typedef std::default_random_engine Rgen;
 typedef std::discrete_distribution<int> DiscFdr;
+typedef std::uniform_real_distribution<double> UnifFdr;
 typedef float numty;
+
+static bool isContract( std::vector<numty> );
+static bool isValidPoint (numty x, numty y);
+static void errMessage(bool);
+
 
 #endif /* defined(__Flame_Fractal__utilities__) */

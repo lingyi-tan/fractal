@@ -10,40 +10,35 @@
 #include "Parameters.h"
 #include "Transformation.h"
 #include "NonLinTrans.h"
+#include "PointProcess.h"
+#include "test.h"
 
 int main(int argc, char * argv[]){
     
     std::cout << "Hello, World\n";
     
+    Test testNew;
+    //testNew._test_vector();
+    
+    
     // 1. initialize parameters
     
-    Parameters para;
+    static Parameters para;
     para.update();
     
     // 2. initialize transformation
     
-    Transformation newTrans(para);
+    testNew._test_transform();
     
     // 3. point process
-    std::vector<numty> point0{0.5,0.5};
-    newTrans.push(point0);
-    std::default_random_engine generator;
-    std::discrete_distribution<int> distribution(para.getProba().begin(), para.getProba().end());
+   
+    testNew._test_pointProcess();
+   // 4. point set
+    
 
-    newTrans.preTrans();
-    newTrans.nonLinTrans();
-    newTrans.postTrans();
-    int choose = distribution (generator);
-    std::vector<numty> point1;
-    point1= newTrans.getOutPut();
-    std::cout <<"choose: "<<choose;
-    std::cout<<point1[0]<<point1[1]<<std::endl;
-    
-  /*  // 4. point set
-    
     // 5. draw
     
-    numty x = 0.5; numty y = 0.5;
+/*    numty x = 0.5; numty y = 0.5;
     numty lulu[4]={0,0,0,0};
     void (*foo)(const numty, const numty, numty *);
     foo = spheric;

@@ -13,11 +13,17 @@
 #include "Transformation.h"
 
 class PointProcess {
-    numty * _xtraj;
-    numty * _ytraj;
+    Parameters * _pparam;
+    std::vector<numty> _xtraj;
+    std::vector<numty> _ytraj;
     int _steps;
-    
-    
+public:
+    PointProcess();
+    ~PointProcess();
+    void postTrans(Parameters & pparam);
+    std::vector<numty> getXcord();
+    std::vector<numty> getYcord();
+    void start(int iter, Rgen & eng, Parameters & pparam);
 };
 
 #endif /* defined(__Flame_Fractal__PointProcess__) */

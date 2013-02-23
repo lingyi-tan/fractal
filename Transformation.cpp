@@ -13,7 +13,7 @@
 Transformation::Transformation(){
     _ppara = nullptr;
     _input.assign(2, 0);
-    _interm.assign(4, 0);
+    _interm.assign(2, 0);
     _output.assign(2, 0);
     _step = 0;
 }
@@ -21,7 +21,7 @@ Transformation::Transformation(){
 Transformation::Transformation(Parameters & para) {
     _ppara = & para;
     _input.assign(2, 0);
-    _interm.assign(4, 0);
+    _interm.assign(2, 0);
     _output.assign(2, 0);
     _step = 0;
 }
@@ -36,8 +36,8 @@ const std::vector<numty> Transformation::getOutPut(){
     return _output;
 }
 
-void Transformation::push(const std::vector<numty> input) {
-    _input = input;
+void Transformation::push(const numty x, const numty y) {
+    _input[0] = x; _input[1] = y;
 }
 
 void Transformation::preTrans(){
@@ -47,38 +47,54 @@ void Transformation::preTrans(){
         return;
     }
     
-    _interm[0] = _ppara->getPreTrans()[0]* _input[0] + _ppara->getPreTrans()[1]* _input[1] + _ppara->getPreTrans()[2];
-    _interm[1] = _ppara->getPreTrans()[3]* _input[0] + _ppara->getPreTrans()[4]* _input[1] + _ppara->getPreTrans()[5];
+    std::vector<numty> tmp = _ppara->getPreTrans();
+    _interm[0] = tmp[0]* _input[0] + tmp[1]* _input[1] + tmp[2];
+    _interm[1] = tmp[3]* _input[0] + tmp[4]* _input[1] + tmp[5];
     _step = 1;
 }
 
-void Transformation::postTrans(){
+/*void Transformation::postTrans(){
     if (_step != 2) {
         std::cout<<"wrong order in transformation"<<std::endl;
         return;
     }
     // linear transformation using parameters of preTrans
-    _output[0] = _ppara->getPostTrans()[0]* _interm[2] + _ppara->getPostTrans()[1]* _interm[3] + _ppara->getPreTrans()[2];
-    _output[1] = _ppara->getPostTrans()[3]* _interm[2] + _ppara->getPostTrans()[4]* _interm[3] + _ppara->getPreTrans()[5];
-    _step = 3;
-}
+    std::vector<numty> tmp = _ppara->getPostTrans();
+    _output[0] = tmp[0]* _interm[2] + tmp[1]* _interm[3] + tmp[2];
+    _output[1] = tmp[3]* _interm[2] + tmp[4]* _interm[3] + tmp[5];
+    _step = 0;
+}*/
 
-void Transformation::nonLinTrans() {
+void Transformation::nonLinTrans(Rgen & engine) {
     if (_step != 1) {
         std::cout<<"wrong order in transformation"<<std::endl;
         return;
     }
     
-    Rgen engine;
-    
-    //Problem with random number generator !!!! 
-    DiscFdr whichTrans (_ppara->getProba().begin(),_ppara->getProba().end());
+    std::vector<numty> probab = _ppara->getProba();
+
+    //Problem with random number generator !!!!
+    DiscFdr whichTrans (probab.begin(),probab.end());
     // random generator machine
-    
-    _ppara->_nonLinTrans[whichTrans(engine)](_interm[0],_interm[1], &_interm[2]);
-   // _ppara->_nonLinTrans[4](_interm[0],_interm[1], &_interm[2]);
-    // draw a number (with the predefined probability) to decide which non linear transformation to be used.
-    _step = 2;
+    int which = whichTrans(engine);
+    _ppara->_nonLinTrans[which](_interm[0],_interm[1], &_output[0]);
+    //std::cout<<"r.v.: "<<which<<"    ";
+
+    _step = 0;
     
 }
 
+void Transformation::multiTrans(Rgen & engine){
+    std::vector<numty> pre = _ppara->getPreTrans();
+    _interm[0] = pre[0]* _input[0] + pre[1]* _input[1] + pre[2];
+    _interm[1] = pre[3]* _input[0] + pre[4]* _input[1] + pre[5];
+    std::vector<numty> probab = _ppara->getProba();
+    
+    //Problem with random number generator ?
+    
+    DiscFdr whichTrans (probab.begin(),probab.end());
+    // random generator machine
+    int which = whichTrans(engine);
+    _ppara->_nonLinTrans[which](_interm[0],_interm[1], &_output[0]);
+  
+}

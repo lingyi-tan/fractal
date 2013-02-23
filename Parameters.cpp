@@ -18,7 +18,9 @@ Parameters::Parameters(){
         _preTrans.push_back(id[i]);
         _postTrans.push_back(id[i]);
     }
-    _k = 0;
+    _prob.assign(12, 1);
+    //_prob.push_back(1);
+    _k = 12;
     
 }
 
@@ -42,8 +44,6 @@ const std::vector<numty> Parameters::getPostTrans(){
 
 void Parameters::update() {
     // simple update, DEBUG purpose
-    _prob.assign(11, 0);
-    _prob.push_back(1);
     _k = 1;
     _preTrans.erase(_preTrans.begin(),_preTrans.end());
     _postTrans.erase(_postTrans.begin(), _postTrans.end());
@@ -52,7 +52,6 @@ void Parameters::update() {
         _preTrans.push_back(tild[i]);
         _postTrans.push_back(tild[i]);
     }
-    _k = 0;
 }
 
 // still need to define function isContract
