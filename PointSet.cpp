@@ -18,7 +18,7 @@ PointSet::~PointSet(){
 
 }
 
-void PointSet::runProcess(){
+void PointSet::runProcess(int iter, Rgen & gen, Parameters & par){
     for (int i = 0;i<_Nsim;i++){
         PointProcess point;
         point.start(_Nsim, _rgen, _para);

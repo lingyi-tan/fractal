@@ -28,11 +28,11 @@ Transformation::Transformation(Parameters & para) {
 
 Transformation::~Transformation(){}
 
-const std::vector<numty> Transformation::getInput(){
+std::vector<numty> Transformation::getInput() const {
     return _input;
 }
 
-const std::vector<numty> Transformation::getOutPut(){
+std::vector<numty> Transformation::getOutPut() const {
     return _output;
 }
 

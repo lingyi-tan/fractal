@@ -19,6 +19,7 @@ int main(int argc, char * argv[]){
     std::cout << "Hello, World\n";
     
     Test testNew;
+    
     //testNew._test_vector();
     Rgen rgen;
     
@@ -34,7 +35,9 @@ int main(int argc, char * argv[]){
     
     // 3. point process
    
-//    testNew._test_pointProcess();
+    testNew._test_pointProcess();
+    
+     
    // 4. point set
     PointSet pointset(20000, rgen, para);
     pointset.runProcess();

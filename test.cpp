@@ -8,6 +8,7 @@
 
 #include "test.h"
 
+
 void Test::_test_vector(){
     std::vector<numty> newx;
     numty tmp;
@@ -28,6 +29,7 @@ void Test::_test_vector(){
     }
     
 }
+
 
 void Test::_test_transform() {
     Parameters para;
@@ -73,9 +75,40 @@ void Test::_test_pointProcess(){
         newProcess.start(2000, eng, para);
         xcord = newProcess.getXcord();
         ycord = newProcess.getYcord();
+        std::string fileX = "/Users/bunny/geek/test/fractal/datax.txt";
+        std::string fileY = "/Users/bunny/geek/test/fractal/datay.txt";
+        
+        Output outX(xcord, fileX);
+        outX.writeTxt(false);
+        Output outY(ycord, fileY);
+        outY.writeTxt(false);
+
         std::cout<<"iteration :" <<r;
         
         // the coordinates to be sent to pointsets !
     }
     std::cout<<"finish !"<<std::endl;
+}
+
+
+/*void Test::_test_qt(){
+
+        QApplication app(argc, argv);
+        
+        QPushButton bouton("Salut les Zéros, la forme ?");
+        bouton.setText("Pimp mon bouton !")
+        
+        bouton.show();
+        
+        return app.exec();
+} */
+
+
+void Test::_test_output() {
+    std::vector<numty> trydata;
+    for (int i = 0; i < 200; i++)
+        trydata.push_back(i*i);
+    std::string name = "/Users/bunny/geek/test/fractal/myoutput";
+    Output newOut(trydata, name);
+    std::cout<<newOut.writeTxt(true)<<std::endl;
 }
