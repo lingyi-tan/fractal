@@ -20,6 +20,7 @@
 #include <vector>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
 typedef std::default_random_engine Rgen;
 typedef std::discrete_distribution<int> DiscFdr;

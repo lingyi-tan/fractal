@@ -9,15 +9,11 @@
 #ifndef __Flame_Fractal__Wrapper__
 #define __Flame_Fractal__Wrapper__
 
-#include <iostream>
-#include <random>
-#include <vector>
-#include "PointSet.h"
+#include "utilities.h"
 #include "Parameters.h"
 
 class WrapperPointSet{
 private:
-    Rgen _rgen; //Random generator to pass to PointSet
     int _nsim; //Number of initial points
     std::vector<numty> _prepointsX; //table of the positions of the points received from PointProcess
     std::vector<numty> _prepointsY; //table of the positions of the points received from PointProcess

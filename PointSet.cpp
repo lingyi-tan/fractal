@@ -8,9 +8,8 @@
 
 #include "PointSet.h"
 
-PointSet::PointSet(int n, Rgen &rgen, Parameters &para){
+PointSet::PointSet(int n, Parameters &para){
     _Nsim = n;
-    _rgen = rgen;
     _para = para;
 }
 
@@ -21,7 +20,7 @@ PointSet::~PointSet(){
 void PointSet::runProcess(){
     for (int i = 0;i<_Nsim;i++){
         PointProcess point;
-        point.start(_Nsim, _rgen, _para);
+        point.start(_Nsim, _para);
         pointReceiver(point.getXcord(),point.getXcord());
     }
 }
