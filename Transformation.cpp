@@ -7,8 +7,6 @@
 //
 
 #include "Transformation.h"
-#include "Parameters.h"
-#include "utilities.h"
 
 Transformation::Transformation(){
     _ppara = nullptr;
@@ -40,14 +38,14 @@ void Transformation::push(const numty x, const numty y) {
     _input[0] = x; _input[1] = y;
 }
 
-void Transformation::preTrans(){
+void Transformation::preTrans(int whichPre){
     // linear transformation using parameters of preTrans
     if (_step != 0) {
         std::cout<<"wrong order in transformation"<<std::endl;
         return;
     }
     
-    std::vector<numty> tmp = _ppara->getPreTrans();
+    std::vector<numty> tmp = _ppara->getPreTrans(whichPre);
     _interm[0] = tmp[0]* _input[0] + tmp[1]* _input[1] + tmp[2];
     _interm[1] = tmp[3]* _input[0] + tmp[4]* _input[1] + tmp[5];
     _step = 1;
@@ -85,15 +83,18 @@ void Transformation::nonLinTrans(Rgen & engine) {
 }
 
 void Transformation::multiTrans(Rgen & engine){
-    std::vector<numty> pre = _ppara->getPreTrans();
+    std::vector<numty> probab = _ppara->getProba();
+    DiscFdr whichTrans (probab.begin(),probab.end());
+    
+    // random generator machine
+    int whichPre = whichTrans(engine);
+    std::vector<numty> pre = _ppara->getPreTrans(whichPre);
     _interm[0] = pre[0]* _input[0] + pre[1]* _input[1] + pre[2];
     _interm[1] = pre[3]* _input[0] + pre[4]* _input[1] + pre[5];
-    std::vector<numty> probab = _ppara->getProba();
+
     
     //Problem with random number generator ?
-    
-    DiscFdr whichTrans (probab.begin(),probab.end());
-    // random generator machine
+
     int which = whichTrans(engine);
     _ppara->_nonLinTrans[which](_interm[0],_interm[1], &_output[0]);
   

@@ -25,6 +25,7 @@
 class Test{
 public:
     void _test_vector();
+    void _test_random(Rgen & gen);
     void _test_transform();
     void _test_pointProcess();
     void _test_qt();

@@ -42,13 +42,7 @@ void Test::_test_transform() {
     
     Rgen eng;
     for (int j = 0; j<10; j ++) {
-        newTrans.preTrans();
-        newTrans.nonLinTrans(eng);
-        
-        //newTrans.postTrans();
-        //or use multiTrans instead to save some time
-        
-        //newTrans.multiTrans(eng);
+        newTrans.multiTrans(eng);
         std::vector<numty> point1 = newTrans.getOutPut();
         for (int i = 0; i<point1.size(); i++)
             std::cout<<point1[i]<<", ";
@@ -63,20 +57,20 @@ void Test::_test_pointProcess(){
     newTrans.push(0.5,0.5);
     std::vector<numty> probab = para.getProba();
     
-    std::default_random_engine generator;
-    std::discrete_distribution<int> distribution(probab.begin(), probab.end());
+    Rgen generator;
+    DiscFdr distribution(probab.begin(), probab.end());
     
     Rgen eng;
     PointProcess newProcess;
     std::vector<numty> xcord;
     std::vector<numty> ycord;
     std::cout<<"start !"<<std::endl;
-    for (int r = 0 ; r <10; r++) {
+    for (int r = 0 ; r < 2; r++) {
         newProcess.start(2000, eng, para);
         xcord = newProcess.getXcord();
         ycord = newProcess.getYcord();
-        std::string fileX = "/Users/bunny/geek/test/fractal/datax.txt";
-        std::string fileY = "/Users/bunny/geek/test/fractal/datay.txt";
+        std::string fileX = "/Users/bunny/geek/test/fractal/datax2.txt";
+        std::string fileY = "/Users/bunny/geek/test/fractal/datay2.txt";
         
         Output outX(xcord, fileX);
         outX.writeTxt(false);
@@ -111,4 +105,17 @@ void Test::_test_output() {
     std::string name = "/Users/bunny/geek/test/fractal/myoutput";
     Output newOut(trydata, name);
     std::cout<<newOut.writeTxt(true)<<std::endl;
+}
+
+void Test::_test_random(Rgen & gen) {
+    std::vector<numty> probab = {0.2, 0.8};
+    DiscFdr whichTrans (probab.begin(),probab.end());
+    // random generator machine
+    std::vector<numty> tmp;
+    for (int i = 0; i<100; i ++) {
+        tmp.push_back(whichTrans(gen));
+        std::cout<<tmp.at(i)<<", ";
+    }
+    std::cout<<"\nfinish!"<<std::endl;
+
 }

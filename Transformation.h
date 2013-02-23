@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "Parameters.h"
+#include "utilities.h"
 #include "NonLinTrans.h"
 
 class Transformation {
@@ -27,7 +28,7 @@ public:
     std::vector<numty> getOutPut() const;
     std::vector<numty> getInput() const;
     void push(const numty x, const numty y);  //
-    void preTrans();
+    void preTrans(int);
     void nonLinTrans(Rgen & engine);
     // void postTrans();
     void multiTrans(Rgen & engine);

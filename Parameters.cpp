@@ -13,14 +13,17 @@
 
 
 Parameters::Parameters(){
-    numty id[6] = {1,0,0, 0,1,0};
-    for (int i = 0; i<6; i++){
-        _preTrans.push_back(id[i]);
-        _postTrans.push_back(id[i]);
+    _postTrans.assign(6, 0);
+    _postTrans.at(0) = _postTrans.at(4) = 1;
+    for (int k = 0; k<12; k++) {
+        _preTrans[k].assign(6, 0);
+        _preTrans[k].at(0) = _preTrans[k].at(4) = 0.5;
+        _preTrans[k].at(2) = _preTrans[k].at(5) = 0.5*(k%4==0);
+        if (k%4 == 3) _preTrans[k] = _postTrans;
     }
-    _prob.assign(12, 1);
-    //_prob.push_back(1);
-    _k = 12;
+    _prob.assign(12, 0);
+    _prob.at(0) = 1;
+    _k = 1;
     
 }
 
@@ -34,24 +37,18 @@ std::vector<numty> Parameters::getProba() const{
     return _prob;
 }
 
-std::vector<numty> Parameters::getPreTrans() const {
-    return _preTrans;
+std::vector<numty> Parameters::getPreTrans(int which) const {
+    return _preTrans[which];
 }
 
 std::vector<numty> Parameters::getPostTrans() const{
     return _postTrans;
 }
 
+// does not do anything !!!
 void Parameters::update() {
     // simple update, DEBUG purpose
-    _k = 1;
-    _preTrans.erase(_preTrans.begin(),_preTrans.end());
-    _postTrans.erase(_postTrans.begin(), _postTrans.end());
-    numty tild[6] = {0.5,0.5,0, 0.5,-0.5,0};
-    for (int i = 0; i<6; i++){
-        _preTrans.push_back(tild[i]);
-        _postTrans.push_back(tild[i]);
-    }
+
 }
 
 // still need to define function isContract

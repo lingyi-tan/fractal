@@ -13,11 +13,13 @@
 #define RIGHT 1
 #define TOP 1
 #define BOTTOM -1
+#define TINY 0.00001
 
 #include <iostream>
 #include <random>
 #include <vector>
 #include <math.h>
+#include <stdlib.h>
 
 typedef std::default_random_engine Rgen;
 typedef std::discrete_distribution<int> DiscFdr;

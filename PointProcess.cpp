@@ -40,8 +40,8 @@ void PointProcess::postTrans(Parameters & pparam){
 
 void PointProcess::start(int iter, Rgen & eng, Parameters & pparam){
     UnifFdr runif(-1,1);
-    _xtraj.erase(_xtraj.begin(),_xtraj.end());
-    _ytraj.erase(_ytraj.begin(),_ytraj.end());
+    _xtraj.clear();
+    _ytraj.clear();
     Transformation transformer(pparam);
     
     for (int it = 0; it < iter; it ++){
@@ -50,7 +50,7 @@ void PointProcess::start(int iter, Rgen & eng, Parameters & pparam){
         std::vector<numty> tmpx = _xtraj;
         std::vector<numty> tmpy = _ytraj;
         for (int i = 0; i < MAXWALK; i++){
-            transformer.push(*tmpx.end(),*tmpy.end());
+            transformer.push(tmpx.at(i),tmpy.at(i));
             /*transformer.preTrans();
             transformer.nonLinTrans(eng);
             transformer.postTrans();*/

@@ -7,19 +7,22 @@
 //
 #include <iostream>
 #include <math.h>
-#include <boost/python/module.hpp>
+//#include <boost/python/module.hpp>
 #include "Parameters.h"
 #include "Transformation.h"
 #include "NonLinTrans.h"
 #include "PointProcess.h"
 #include "PointSet.h"
 #include "test.h"
+#include <stdlib.h>
 
 int main(int argc, char * argv[]){
     
     std::cout << "Hello, World\n";
     
-    Test testNew;
+    for (int i = 1; i <30; i++)
+        std::cout << rand()%10000<<",";
+    //Test testNew;
     
     //testNew._test_vector();
     Rgen rgen;
@@ -27,8 +30,8 @@ int main(int argc, char * argv[]){
     
     // 1. initialize parameters
     
-    static Parameters para;
-    para.update();
+    //static Parameters para;
+    //para.update();
     
     // 2. initialize transformation
     
@@ -36,13 +39,14 @@ int main(int argc, char * argv[]){
     
     // 3. point process
    
-    testNew._test_pointProcess();
+    //testNew._test_pointProcess();
     
      
    // 4. point set
-    PointSet pointset(20000, rgen, para);
-    pointset.runProcess();
+    //PointSet pointset(20000, rgen, para);
+    //pointset.runProcess();
     
+    //testNew._test_random(rgen);
 
     // 5. draw
     

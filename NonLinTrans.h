@@ -41,6 +41,10 @@ static void swirl (const numty x , const numty y , numty * output){
 // 4
 static void horseshoe (const numty x , const numty y , numty * output){
     numty r = norm(x,y);
+    if (r < TINY) {
+        output[0] = output[1] = 0;
+        return;
+    }
     output[0] = (x-y)*(x+y)/r;
     output[1] = 2*x*y/r;
 }
@@ -75,6 +79,10 @@ static void disc (const numty x , const numty y , numty * output){
 // 9
 static void spiral (const numty x , const numty y , numty * output){
     numty r = norm(x,y);
+    if (r < TINY) {
+        output[0] = output[1] = 0;
+        return;
+    }
     output[0] = (sinf(atanf(y/x)) + cosf(r))/r;
     output[1] = (sinf(atanf(y/x)) - cosf(r))/r;
 }
@@ -82,6 +90,10 @@ static void spiral (const numty x , const numty y , numty * output){
 // 10
 static void hyperbolic (const numty x , const numty y , numty * output){
     numty r = norm(x,y); numty the = atanf(y/x);
+    if (r < TINY) {
+        output[0] = output[1] = 0;
+        return;
+    }
     output[0] = sinf(the)/r;
     output[1] = r * cosf(the);
 }
