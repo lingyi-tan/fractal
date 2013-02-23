@@ -9,9 +9,8 @@
 #ifndef __Flame_Fractal__Transformation__
 #define __Flame_Fractal__Transformation__
 
-#include <iostream>
-#include "Parameters.h"
 #include "utilities.h"
+#include "Parameters.h"
 #include "NonLinTrans.h"
 
 class Transformation {
@@ -29,9 +28,9 @@ public:
     std::vector<numty> getInput() const;
     void push(const numty x, const numty y);  //
     void preTrans(int);
-    void nonLinTrans(Rgen & engine);
+    void nonLinTrans();
     // void postTrans();
-    void multiTrans(Rgen & engine);
+    void multiTrans();
     
 };
 

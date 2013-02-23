@@ -38,15 +38,14 @@ void PointProcess::postTrans(Parameters & pparam){
     
 }
 
-void PointProcess::start(int iter, Rgen & eng, Parameters & pparam){
-    UnifFdr runif(-1,1);
+void PointProcess::start(int iter, Parameters & pparam){
     _xtraj.clear();
     _ytraj.clear();
     Transformation transformer(pparam);
     
     for (int it = 0; it < iter; it ++){
-        _xtraj.push_back(runif(eng));
-        _ytraj.push_back(runif(eng));
+        _xtraj.push_back(2*rand()%BIG/BIG-1);
+        _ytraj.push_back(2*rand()%BIG/BIG-1);
         std::vector<numty> tmpx = _xtraj;
         std::vector<numty> tmpy = _ytraj;
         for (int i = 0; i < MAXWALK; i++){
@@ -55,9 +54,7 @@ void PointProcess::start(int iter, Rgen & eng, Parameters & pparam){
             transformer.nonLinTrans(eng);
             transformer.postTrans();*/
             /* or use multiTrans instead to save some time */
-            
-            transformer.multiTrans(eng);
-            
+            transformer.multiTrans();            
             tmpx.push_back(transformer.getOutPut()[0]);
             tmpy.push_back(transformer.getOutPut()[1]);
             if (i >= NONPLOT) {

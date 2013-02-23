@@ -63,18 +63,18 @@ void Transformation::preTrans(int whichPre){
     _step = 0;
 }*/
 
-void Transformation::nonLinTrans(Rgen & engine) {
+void Transformation::nonLinTrans() {
     if (_step != 1) {
         std::cout<<"wrong order in transformation"<<std::endl;
         return;
     }
-    
-    std::vector<numty> probab = _ppara->getProba();
-
-    //Problem with random number generator !!!!
-    DiscFdr whichTrans (probab.begin(),probab.end());
-    // random generator machine
-    int which = whichTrans(engine);
+    numty ranNonLin = rand()%BIG/BIG;
+    int which = 0; numty tmp = 0; // reinitiate
+    while (ranNonLin > tmp) {
+        tmp += _ppara->getProbaNonLin()[which];
+        which++;
+    }
+    which = which-1;
     _ppara->_nonLinTrans[which](_interm[0],_interm[1], &_output[0]);
     //std::cout<<"r.v.: "<<which<<"    ";
 
@@ -82,20 +82,28 @@ void Transformation::nonLinTrans(Rgen & engine) {
     
 }
 
-void Transformation::multiTrans(Rgen & engine){
-    std::vector<numty> probab = _ppara->getProba();
-    DiscFdr whichTrans (probab.begin(),probab.end());
+void Transformation::multiTrans(){
     
-    // random generator machine
-    int whichPre = whichTrans(engine);
-    std::vector<numty> pre = _ppara->getPreTrans(whichPre);
-    _interm[0] = pre[0]* _input[0] + pre[1]* _input[1] + pre[2];
-    _interm[1] = pre[3]* _input[0] + pre[4]* _input[1] + pre[5];
+    // linear transformation
+    // srand(time(0));
+    numty ranLin = (rand()%RANGE)/RANGE;
+    int which = 0; numty tmp = 0;
+    std::vector<numty> probLin = _ppara->getProbaLin();
+    while (ranLin > tmp){
+        tmp += probLin[which];
+        which ++;
+    }
+    std::vector<numty> paraLin = _ppara->getPreTrans(which);
+    _interm[0] = paraLin[0]* _input[0] + paraLin[1]* _input[1] + paraLin[2];
+    _interm[1] = paraLin[3]* _input[0] + paraLin[4]* _input[1] + paraLin[5];
 
-    
-    //Problem with random number generator ?
-
-    int which = whichTrans(engine);
+    // non linear transformation
+    numty ranNonLin = (rand()%RANGE)/RANGE;
+    which = 0; tmp = 0; // reinitiate
+    std::vector<numty> probNonLin = _ppara->getProbaNonLin();
+    while (ranNonLin > tmp) {
+        tmp += probNonLin[which];
+        which++;
+    }
     _ppara->_nonLinTrans[which](_interm[0],_interm[1], &_output[0]);
-  
 }

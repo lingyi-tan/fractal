@@ -23,7 +23,7 @@ public:
     void postTrans(Parameters & pparam);
     std::vector<numty> getXcord();
     std::vector<numty> getYcord();
-    void start(int iter, Rgen & eng, Parameters & pparam);
+    void start(int iter, Parameters & pparam);
 };
 
 #endif /* defined(__Flame_Fractal__PointProcess__) */
