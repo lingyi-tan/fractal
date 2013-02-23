@@ -27,7 +27,6 @@ public:
     void pointReceiver(std::vector<numty>,std::vector<numty>); //receives positions of points to include
     std::vector<numty> getPointsX(); //provides the X values of the points
     std::vector<numty> getPointsY(); //provides the Y values of the points
-    
 };
 
 #endif /* defined(__Flame_Fractal__PointSet__) */
