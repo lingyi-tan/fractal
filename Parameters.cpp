@@ -18,11 +18,13 @@ Parameters::Parameters(){
     for (int k = 0; k<12; k++) {
         _preTrans[k].assign(6, 0);
         _preTrans[k].at(0) = _preTrans[k].at(4) = 0.5;
-        _preTrans[k].at(2) = _preTrans[k].at(5) = 0.5*(k%4==0);
+        _preTrans[k].at(5) = 0.5*(k%4==0);
+        _preTrans[k].at(2) = 0.5*(k%4==1);
         if (k%4 == 3) _preTrans[k] = _postTrans;
     }
-    _prob.assign(12, 0);
-    _prob.at(0) = 1;
+    _probNonLin.assign(12, 0);
+    _probNonLin.at(0) = 1;
+    _probLin.assign(12, 1.0/12.0);
     _k = 1;
     
 }
@@ -33,8 +35,12 @@ int Parameters::getCount() const {
     return _k;
 }
 
-std::vector<numty> Parameters::getProba() const{
-    return _prob;
+std::vector<numty> Parameters::getProbaNonLin() const{
+    return _probNonLin;
+}
+
+std::vector<numty> Parameters::getProbaLin() const{
+    return _probLin;
 }
 
 std::vector<numty> Parameters::getPreTrans(int which) const {

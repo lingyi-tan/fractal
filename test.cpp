@@ -35,14 +35,9 @@ void Test::_test_transform() {
     Parameters para;
     Transformation newTrans(para);
     newTrans.push(0.5,0.5);
-    std::vector<numty> probab = para.getProba();
     
-    std::default_random_engine generator;
-    std::discrete_distribution<int> distribution(probab.begin(), probab.end());
-    
-    Rgen eng;
     for (int j = 0; j<10; j ++) {
-        newTrans.multiTrans(eng);
+        newTrans.multiTrans();
         std::vector<numty> point1 = newTrans.getOutPut();
         for (int i = 0; i<point1.size(); i++)
             std::cout<<point1[i]<<", ";
@@ -55,18 +50,12 @@ void Test::_test_pointProcess(){
     Parameters para;
     Transformation newTrans(para);
     newTrans.push(0.5,0.5);
-    std::vector<numty> probab = para.getProba();
-    
-    Rgen generator;
-    DiscFdr distribution(probab.begin(), probab.end());
-    
-    Rgen eng;
     PointProcess newProcess;
     std::vector<numty> xcord;
     std::vector<numty> ycord;
     std::cout<<"start !"<<std::endl;
     for (int r = 0 ; r < 2; r++) {
-        newProcess.start(2000, eng, para);
+        newProcess.start(2000, para);
         xcord = newProcess.getXcord();
         ycord = newProcess.getYcord();
         std::string fileX = "/Users/bunny/geek/test/fractal/datax2.txt";
@@ -107,7 +96,7 @@ void Test::_test_output() {
     std::cout<<newOut.writeTxt(true)<<std::endl;
 }
 
-void Test::_test_random(Rgen & gen) {
+/*void Test::_test_random(Rgen & gen) {
     std::vector<numty> probab = {0.2, 0.8};
     DiscFdr whichTrans (probab.begin(),probab.end());
     // random generator machine
@@ -118,4 +107,4 @@ void Test::_test_random(Rgen & gen) {
     }
     std::cout<<"\nfinish!"<<std::endl;
 
-}
+}*/

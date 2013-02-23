@@ -14,16 +14,18 @@
 #define TOP 1
 #define BOTTOM -1
 #define TINY 0.00001
+#define BIG 10000
+#define RANGE 100
 
 #include <iostream>
-#include <random>
 #include <vector>
 #include <math.h>
 #include <stdlib.h>
+#include <time.h>
 
-typedef std::default_random_engine Rgen;
-typedef std::discrete_distribution<int> DiscFdr;
-typedef std::uniform_real_distribution<double> UnifFdr;
+//typedef std::default_random_engine Rgen;
+//typedef std::discrete_distribution<int> DiscFdr;
+//typedef std::uniform_real_distribution<double> UnifFdr;
 typedef float numty;
 
 static bool isContract( std::vector<numty> );
