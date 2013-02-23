@@ -7,7 +7,10 @@
 //
 #include <iostream>
 #include <math.h>
+<<<<<<< HEAD
 //#include <boost/python/module.hpp>
+=======
+>>>>>>> 22fd6ec3fc7b57684f799d01cdfe5bd0155211fb
 #include "Parameters.h"
 #include "Transformation.h"
 #include "NonLinTrans.h"
