@@ -66,6 +66,8 @@ void PointProcess::start(int iter, Parameters & pparam){
             transformer.multiTrans();
             tmpx = transformer.getOutPut()[0];
             tmpy = transformer.getOutPut()[1];
+            if (!isValidPoint(tmpx, tmpy))
+                break;
 // debug use
 //            std::cout<<"\n x-"<<tmpx<<", y-"<<tmpy;
             

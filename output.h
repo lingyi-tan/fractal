@@ -21,6 +21,7 @@ public:
     Output(std::vector<numty> & data, std::string & name);
     Output(std::string & name);
     ~Output();
+    void reset();
     bool writeTxt(bool overWrite);
 };
 
