@@ -91,7 +91,7 @@ void Transformation::multiTrans(){
     std::vector<numty> probLin = _ppara->getProbaLin();
     while (ranLin > tmp){
         tmp += probLin[which];
-        which ++;
+        if (tmp < 1) which ++;
     }
     std::vector<numty> paraLin = _ppara->getPreTrans(which);
     _interm[0] = paraLin[0]* _input[0] + paraLin[1]* _input[1] + paraLin[2];
@@ -103,7 +103,7 @@ void Transformation::multiTrans(){
     std::vector<numty> probNonLin = _ppara->getProbaNonLin();
     while (ranNonLin > tmp) {
         tmp += probNonLin[which];
-        which++;
+        if (tmp < 1) which++;
     }
     _ppara->_nonLinTrans[which](_interm[0],_interm[1], &_output[0]);
 }

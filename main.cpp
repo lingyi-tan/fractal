@@ -33,8 +33,8 @@ int main(int argc, char * argv[]){
     // 1. initialize parameters
     
     Parameters para;
-    std::vector<bool> inNonLin = {0,1,0,0, 0,0,1,0, 1,0,0,0};
-    para.update(inNonLin, 4, 500);
+    std::vector<bool> inNonLin = {0,0,0,0, 0,0,1,0, 0,0,0,0};
+    para.update(inNonLin, 4);
     
     // 2. initialize transformation
     
