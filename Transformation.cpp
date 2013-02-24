@@ -9,7 +9,7 @@
 #include "Transformation.h"
 
 Transformation::Transformation(){
-    _ppara = nullptr;
+    _ppara = NULL;
     _input.assign(2, 0);
     _interm.assign(2, 0);
     _output.assign(2, 0);

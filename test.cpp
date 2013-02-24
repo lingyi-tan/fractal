@@ -91,8 +91,8 @@ void Test::_test_output() {
     for (int i = 0; i < 200; i++)
         trydata.push_back(i*i);
     std::string name = "/Users/bunny/geek/test/fractal/myoutput";
-    Output newOut(trydata, name);
-    std::cout<<newOut.writeTxt(true)<<std::endl;
+//    Output newOut(trydata, name);
+//    std::cout<<newOut.writeTxt(true)<<std::endl;
 }
 
 /*void Test::_test_random(Rgen & gen) {

@@ -10,15 +10,15 @@
 
 WrapperPointSet::WrapperPointSet(int N){
     int _nsim = N;
-    Rgen _rgen;
+    srand(time(NULL));
     std::vector<numty> _prepointsX;
     std::vector<numty> _prepointsY;
 }
 
 void WrapperPointSet::go(){
     Parameters para;
-    para.update();
-    PointSet pointset(_nsim, _rgen, para);
+//    para.update();
+    PointSet pointset(_nsim, para);
     _prepointsX = pointset.getPointsX();
     _prepointsY = pointset.getPointsY();
 }

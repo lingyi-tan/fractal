@@ -16,7 +16,7 @@
 #include "Transformation.h"
 #include "Parameters.h"
 #include "PointProcess.h"
-#include "output.h"
+//#include "output.h"
 
 //#include "QApplication"
 //#include "QPushButton"
