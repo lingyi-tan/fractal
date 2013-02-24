@@ -38,7 +38,7 @@ def main():
     whichNonLin10 = 0
     whichNonLin11 = 0
     whichNonLin12 = 0
-    numLin = 100
+    numLin = 10
 
     colorInc = 3
 
