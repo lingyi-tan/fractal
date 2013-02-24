@@ -41,25 +41,37 @@ void PointProcess::postTrans(Parameters & pparam){
 void PointProcess::start(int iter, Parameters & pparam){
     _xtraj.clear();
     _ytraj.clear();
+    numty tmpx = 0;
+    numty tmpy = 0;
+    srand(time(NULL));
+
     Transformation transformer(pparam);
     
     for (int it = 0; it < iter; it ++){
-        _xtraj.push_back(2*rand()%BIG/BIG-1);
-        _ytraj.push_back(2*rand()%BIG/BIG-1);
-        std::vector<numty> tmpx = _xtraj;
-        std::vector<numty> tmpy = _ytraj;
+        _xtraj.push_back(2*float(rand()%RANGE)/RANGE-1);
+        _ytraj.push_back(2*float(rand()%RANGE)/RANGE-1);
+// debug use
+//        std::cout<<"\n *** new point --- x:"<<_xtraj.back()<<", y-"<<_ytraj.back();
+//        std::cout<<"\nstart point:\n ";
+        
+        
+        tmpx = _xtraj.back(); tmpy = _ytraj.back();
         for (int i = 0; i < MAXWALK; i++){
-            transformer.push(tmpx.at(i),tmpy.at(i));
+            transformer.push(tmpx,tmpy);
             /*transformer.preTrans();
             transformer.nonLinTrans(eng);
             transformer.postTrans();*/
+            
             /* or use multiTrans instead to save some time */
-            transformer.multiTrans();            
-            tmpx.push_back(transformer.getOutPut()[0]);
-            tmpy.push_back(transformer.getOutPut()[1]);
+            transformer.multiTrans();
+            tmpx = transformer.getOutPut()[0];
+            tmpy = transformer.getOutPut()[1];
+// debug use
+//            std::cout<<"\n x-"<<tmpx<<", y-"<<tmpy;
+            
             if (i >= NONPLOT) {
-                _xtraj.push_back(tmpx.at(i));
-                _ytraj.push_back(tmpy.at(i));
+                _xtraj.push_back(tmpx);
+                _ytraj.push_back(tmpy);
                 
             }
         }

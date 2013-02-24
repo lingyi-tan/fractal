@@ -85,8 +85,8 @@ void Transformation::nonLinTrans() {
 void Transformation::multiTrans(){
     
     // linear transformation
-    // srand(time(0));
-    numty ranLin = (rand()%RANGE)/RANGE;
+    // srand(time(NULL));
+    numty ranLin = float(rand()%RANGE)/RANGE;
     int which = 0; numty tmp = 0;
     std::vector<numty> probLin = _ppara->getProbaLin();
     while (ranLin > tmp){
@@ -98,7 +98,7 @@ void Transformation::multiTrans(){
     _interm[1] = paraLin[3]* _input[0] + paraLin[4]* _input[1] + paraLin[5];
 
     // non linear transformation
-    numty ranNonLin = (rand()%RANGE)/RANGE;
+    numty ranNonLin = float(rand()%RANGE)/RANGE;
     which = 0; tmp = 0; // reinitiate
     std::vector<numty> probNonLin = _ppara->getProbaNonLin();
     while (ranNonLin > tmp) {
