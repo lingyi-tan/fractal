@@ -4,14 +4,17 @@
 # http://simpson.edu/computer-science/
  
 # Import a library of functions called 'pygame'
-import pygame
+import pygame, pygame.font, pygame.event, pygame.draw, string
 from collections import defaultdict
 import sys
 from pygame.locals import *
 import pygbutton
 from psWrapper import PyWrapperPointSet
 from time import gmtime
+import box_disp
  
+
+
 def main():
     # Initialize the game engine
     pygame.init()
@@ -26,6 +29,8 @@ def main():
     GRAY      = (128, 128, 128)
     LIGHTGRAY = (212, 208, 200)
     N = 30000
+    xpos = 50
+    ypos = 550
     whichNonLin1 = 0
     whichNonLin2 = 0
     whichNonLin3 = 0
@@ -45,6 +50,7 @@ def main():
     width = 800
     height = 600
 
+    current_string = [] # input string of number of linear transformations
     # Create a button
     buttonGo = pygbutton.PygButton((width-155, 60, 50, 25), 'Go')
     # Create a button to save image
@@ -64,7 +70,11 @@ def main():
     button11 = pygbutton.PygButton((550, 60, 25, 25), '11')
     button12 = pygbutton.PygButton((600, 60, 25, 25), '12')
 
+    btnumlin = pygbutton.PygButton((50, 550, 20, 20), '')
+    btNsim = pygbutton.PygButton((695, 550, 20, 20), '')
 
+    # Create a box for number of linear transformations
+    
 
     # Define the colorCon : the function which controls the coloring behavior
     def linearStep(i):
@@ -88,6 +98,13 @@ def main():
         else:
             return (int)(linearStep(i-0.3333)*255)
 
+    def get_key():
+            while 1:
+                event = pygame.event.poll()
+                if event.type == KEYDOWN:
+                    return event.key
+                else:
+                    pass 
 
     # Set the height and width of the screen
     size=[width,height]
@@ -100,6 +117,7 @@ def main():
     clock = pygame.time.Clock()
     calculated = False
     wrapper = PyWrapperPointSet()
+    inputMode = False
 
 
     while done==False:
@@ -228,6 +246,18 @@ def main():
                     button12.bgcolor = GRAY
                 else:
                     button12.bgcolor = LIGHTGRAY
+            if 'click' in btnumlin.handleEvent(event):
+                numLin = box_disp.test("number of linear")
+            if 'click' in btNsim.handleEvent(event):
+                N = box_disp.test("number of initial points")
+
+    
+
+         # Display the box for inputs
+ 
+                    
+            
+            
 
         # All drawing code happens after the for loop and but
         # inside the main while done==False loop.
@@ -248,8 +278,17 @@ def main():
         button10.draw(screen)
         button11.draw(screen)
         button12.draw(screen)
+        btnumlin.draw(screen)
+        btNsim.draw(screen)
 
-     
+        # Select the font to use. Default font, 25 pt size.
+        font = pygame.font.Font(None, 25)
+        screen.blit(font.render(str(numLin), 1, (255,255,255)),
+                (75, 553))
+        screen.blit(font.render(str(N), 1, (255,255,255)),
+                (720, 553))
+
+      
         if calculated:
             # # Draw points
             drawnPoints = 0
@@ -264,8 +303,7 @@ def main():
             #         colorCon(j,2),colorCon(j,3))
             #     # print(color)
             #     pygame.draw.rect(screen,color,[(int)((pointsX[i]/4+0.5)*width),(int)((pointsY[i]/4+0.5)*height),2,2])
-        # Select the font to use. Default font, 25 pt size.
-        font = pygame.font.Font(None, 25)
+
      
         # Go ahead and update the screen with what we've drawn.
         # This MUST happen after all the other drawing commands.
