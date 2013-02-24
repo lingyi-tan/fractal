@@ -22,22 +22,27 @@ inline numty norm(numty x, numty y){
 
 // 1
 static void sinus (const numty x , const numty y, numty * output){
-    //output[0] = sinf(x);
-    //output[1] = sinf(y);
-    output[0] = x;
-    output[1] = y;
+    output[0] = sinf(x);
+    output[1] = sinf(y);
+    //output[0] = x;
+    //output[1] = y;
 }
 
 // 2
 static void spheric (const numty x , const numty y , numty * output){
-    output[0] = x/norm(x,y);
-    output[1] = y/norm(x,y);
+    numty r = norm(x,y);
+    if (r < TINY) {
+        output[0] = output[1] = 0;
+        return;
+    }
+    output[0] = x/r;
+    output[1] = y/r;
 }
 
 // 3
 static void swirl (const numty x , const numty y , numty * output){
-    output[0] = x*sinf(x*x+y*y) - y*cos(x*x+y*y);
-    
+    output[0] = x*sinf(x*x+y*y) - y*cosf(x*x+y*y);
+    output[1] = x*cosf(x*x+y*y) + y*sinf(x*x+y*y);
 }
 
 // 4

@@ -43,8 +43,7 @@ void PointProcess::start(int iter, Parameters & pparam){
     _ytraj.clear();
     numty tmpx = 0;
     numty tmpy = 0;
-    srand(time(NULL));
-
+    
     Transformation transformer(pparam);
     
     for (int it = 0; it < iter; it ++){
@@ -66,6 +65,8 @@ void PointProcess::start(int iter, Parameters & pparam){
             transformer.multiTrans();
             tmpx = transformer.getOutPut()[0];
             tmpy = transformer.getOutPut()[1];
+            if (!isValidPoint(tmpx, tmpy))
+                break;
 // debug use
 //            std::cout<<"\n x-"<<tmpx<<", y-"<<tmpy;
             

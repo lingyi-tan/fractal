@@ -14,6 +14,7 @@
 #include "PointProcess.h"
 //#include "PointSet.h"
 #include "test.h"
+#include <time.h>
 #include <stdlib.h>
 
 int main(int argc, char * argv[]){
@@ -25,13 +26,14 @@ int main(int argc, char * argv[]){
     
     Test testNew;
     
+    srand(time(NULL));
     //testNew._test_vector();
     
     
     // 1. initialize parameters
     
     Parameters para;
-    std::vector<bool> inNonLin = {0,0,0,0, 1,0,1,0, 0,1,0,0};
+    std::vector<bool> inNonLin = {0,1,0,0, 0,0,1,0, 1,0,0,0};
     para.update(inNonLin, 4, 500);
     
     // 2. initialize transformation

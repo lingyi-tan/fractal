@@ -53,19 +53,20 @@ void Test::_test_pointProcess( Parameters & para){
     std::vector<numty> xcord;
     std::vector<numty> ycord;
     std::cout<<"start !"<<std::endl;
-    for (int r = 0 ; r < 2; r++) {
-        newProcess.start(20, para);
+    std::string fileX = "/Users/bunny/geek/test/fractal/Xcord.txt";
+    std::string fileY = "/Users/bunny/geek/test/fractal/Ycord.txt";
+    Output outX(xcord, fileX); outX.reset();
+    Output outY(ycord, fileY); outY.reset();
+    for (int r = 0 ; r < 4; r++) {
+        newProcess.start(20000, para);
         xcord = newProcess.getXcord();
         ycord = newProcess.getYcord();
-        /*std::string fileX = "/Users/bunny/geek/test/fractal/ikikix.txt";
-        std::string fileY = "/Users/bunny/geek/test/fractal/ikikiy.txt";
         
-        Output outX(xcord, fileX);
         outX.writeTxt(false);
-        Output outY(ycord, fileY);
-        outY.writeTxt(false);*/
+        
+        outY.writeTxt(false);
 
-        std::cout<<"iteration :" <<r;
+        std::cout<<"\niteration :" <<r;
         
         // the coordinates to be sent to pointsets !
     }

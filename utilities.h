@@ -9,10 +9,10 @@
 #ifndef __Flame_Fractal__utilities__
 #define __Flame_Fractal__utilities__
 
-#define LEFT -1
-#define RIGHT 1
-#define TOP 1
-#define BOTTOM -1
+#define LEFT -2
+#define RIGHT 2
+#define TOP 2
+#define BOTTOM -2
 #define TINY 0.00001
 #define BIG 10000
 #define RANGE 50
@@ -28,9 +28,23 @@
 //typedef std::uniform_real_distribution<double> UnifFdr;
 typedef float numty;
 
-static bool isContract( std::vector<numty> );
-static bool isValidPoint (numty x, numty y);
-static void errMessage(bool);
+static bool isContract( std::vector<numty> par){
+    if (par.size() != 6) return false;
+    numty det, trace, eig1, eig2;
+    det = par[0]*par[4]-par[1]*par[3];
+    trace = par[0] + par[4];
+    eig1 = (trace + sqrt(trace*trace - 4*det))/2;
+    eig2 = trace-eig1;
+    return (eig1*eig1<=1 && eig2*eig2<=1);
+}
+
+static bool isValidPoint (numty x, numty y){
+    return (x>=LEFT && x<=RIGHT && y>=BOTTOM && y<=TOP);
+}
+
+static void errMessage(bool wrong) {
+    if (wrong) throw "error here !";
+}
 
 
 #endif /* defined(__Flame_Fractal__utilities__) */

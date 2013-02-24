@@ -23,12 +23,23 @@ Output::Output(string & name){
 
 Output::~Output(){}
 
+void Output::reset(){
+    ofstream myfile;
+    myfile.open(_name,ios::trunc);    
+}
+
 bool Output::writeTxt(bool overWrite) {
     if (_name.empty()) return false;
-    string fileName = _name;
-    ofstream myfile (fileName);
-    if (overWrite) myfile.seekp(ios::trunc);
-    else myfile.seekp(ios::app);
+    //string fileName = _name;
+    ofstream myfile;
+    if (overWrite) {
+        myfile.open(_name,ios::trunc);
+        myfile.seekp(ios::beg);
+    }
+    else {
+        myfile.open(_name,ios::app);
+        myfile.seekp(ios::end);
+    }
     
     if (myfile.is_open()) {
         for (int i = 0; i < _data->size(); i++ )
