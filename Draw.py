@@ -24,7 +24,20 @@ red =   [255,  0,  0]
 DARKGRAY  = ( 64,  64,  64)
 GRAY      = (128, 128, 128)
 LIGHTGRAY = (212, 208, 200)
-N = 100
+N = 30000
+whichNonLin1 = 0
+whichNonLin2 = 1
+whichNonLin3 = 0
+whichNonLin4 = 0
+whichNonLin5 = 0
+whichNonLin6 = 0
+whichNonLin7 = 1
+whichNonLin8 = 0
+whichNonLin9 = 1
+whichNonLin10 = 0
+whichNonLin11 = 0
+whichNonLin12 = 0
+numLin = 4
 
 width = 400
 height = 500
@@ -60,15 +73,19 @@ while done==False:
         if 'click' in buttonGo.handleEvent(event):
                 prePointsXY = []
                 wrapper = PyWrapperPointSet()
-                wrapper.go(N)
+                wrapper.go(N, whichNonLin1, whichNonLin2,
+                    whichNonLin3, whichNonLin4, whichNonLin5,
+                    whichNonLin6, whichNonLin7, whichNonLin8,
+                    whichNonLin9, whichNonLin10, whichNonLin11,
+                    whichNonLin12, numLin)
                 pointsX = wrapper.getPointsX()
                 pointsY = wrapper.getPointsY()
                 for i in range(N):
-                    prePointsXY.append( (pointsX[i],pointsY[i]) )
+                    prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
                 # Count the number of points
                 pointsXY = defaultdict(int)
                 for (a,b) in prePointsXY:
-                    pointsXY[((int)((a*width+width))/2,(int)((b*height+height))/2)] +=1
+                    pointsXY[((int)(a*width),(int)(b*height))] +=1
                 maxHit = max(pointsXY.values())
                 color = range(maxHit)
                 color = [(int)(((i+1)*250)/(max(color)+1)) for i in color]

@@ -5,8 +5,6 @@
 //  Created by Jiali Mei on 2/20/13.
 //  Copyright (c) 2013 Bunny. All rights reserved.
 //
-#define MAXWALK 30
-#define NONPLOT 20
 
 #include "PointSet.h"
 
@@ -24,17 +22,17 @@ PointSet::~PointSet(){
 
 void PointSet::runProcess(){
 //    std::cout<<_Nsim<<std::endl;
-    for (int i = 0;i<_Nsim;i++){
+//    for (int i = 0;i<_Nsim;i++){
 //        std::cout<<i<<std::endl;
         PointProcess point;
         point.start(_Nsim, _para);
         pointReceiver(point.getXcord(),point.getYcord());
-    }
+//    }
 }
 
 void PointSet::pointReceiver(std::vector<numty> newPointsX,std::vector<numty> newPointsY){
 //    std::cout<<1<<std::endl;
-    for (unsigned i=NONPLOT; i<MAXWALK; i++){
+    for (unsigned i=0; i<newPointsX.size(); i++){
 //        std::cout<<newPointsX[i]<<std::endl;
         _prepointsX.push_back(newPointsX[i]);
         _prepointsY.push_back(newPointsY[i]);

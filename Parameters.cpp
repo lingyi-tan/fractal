@@ -52,9 +52,8 @@ std::vector<numty> Parameters::getPostTrans() const{
 }
 
 // updata parameters through specifying which non linear trans to be used, and how many non linear to be used.
-void Parameters::update(std::vector<bool> whichNonLin, int numLin, int Nsim) {
+void Parameters::update(std::vector<bool> whichNonLin, int numLin) {
     // the length of the bool vector has to be 12
-    _Nsim = Nsim;
     numty normConst = 0;
     for (int i = 0; i <12; i++) normConst += numty(whichNonLin[i]);
     for (int i = 0; i<12; i++){

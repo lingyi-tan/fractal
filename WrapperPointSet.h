@@ -12,6 +12,7 @@
 #include "utilities.h"
 #include "Parameters.h"
 #include "PointSet.h"
+#include "PointProcess.h"
 
 class WrapperPointSet{
     private:
@@ -22,7 +23,7 @@ class WrapperPointSet{
     public:
         WrapperPointSet();
         ~WrapperPointSet();
-        void go(int);
+        void go(int N, int n2, int n3, int n4, int n5, int n6, int n7, int n8, int n9, int n10, int n11, int n12, int n13, int numLin);
         std::vector<numty> getPointsX(); //provides the X values of the points
         std::vector<numty> getPointsY(); //provides the Y values of the points
 };

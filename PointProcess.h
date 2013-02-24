@@ -16,7 +16,6 @@ class PointProcess {
     Parameters * _pparam;
     std::vector<numty> _xtraj;
     std::vector<numty> _ytraj;
-    int _steps;
 public:
     PointProcess();
     ~PointProcess();
