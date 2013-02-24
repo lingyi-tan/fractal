@@ -5,7 +5,6 @@
  
 # Import a library of functions called 'pygame'
 import pygame
-import random
 from collections import defaultdict
 import sys
 from pygame.locals import *
@@ -24,29 +23,41 @@ red =   [255,  0,  0]
 DARKGRAY  = ( 64,  64,  64)
 GRAY      = (128, 128, 128)
 LIGHTGRAY = (212, 208, 200)
-N = 30000
+N = 50000
 whichNonLin1 = 0
-whichNonLin2 = 1
+whichNonLin2 = 0
 whichNonLin3 = 0
 whichNonLin4 = 0
 whichNonLin5 = 0
 whichNonLin6 = 0
-whichNonLin7 = 1
+whichNonLin7 = 0
 whichNonLin8 = 0
-whichNonLin9 = 1
+whichNonLin9 = 0
 whichNonLin10 = 0
 whichNonLin11 = 0
 whichNonLin12 = 0
-numLin = 4
+numLin = 2
 
-width = 400
-height = 500
+width = 800
+height = 600
 
 # Create a button
-FPS = 30
-WINDOWWIDTH = 380
-WINDOWHEIGHT = 350
-buttonGo = pygbutton.PygButton((50, 50, 60, 30), 'White')
+buttonGo = pygbutton.PygButton((width-60, 60, 25, 25), 'Go')
+
+# Create 12 buttons to control the type of non linear transformations to use
+button1 = pygbutton.PygButton((50, 60, 25, 25), '1')
+button2 = pygbutton.PygButton((100, 60, 25, 25), '2')
+button3 = pygbutton.PygButton((150, 60, 25, 25), '3')
+button4 = pygbutton.PygButton((200, 60, 25, 25), '4')
+button5 = pygbutton.PygButton((250, 60, 25, 25), '5')
+button6 = pygbutton.PygButton((300, 60, 25, 25), '6')
+button7 = pygbutton.PygButton((350, 60, 25, 25), '7')
+button8 = pygbutton.PygButton((400, 60, 25, 25), '8')
+button9 = pygbutton.PygButton((450, 60, 25, 25), '9')
+button10 = pygbutton.PygButton((500, 60, 25, 25), '10')
+button11 = pygbutton.PygButton((550, 60, 25, 25), '11')
+button12 = pygbutton.PygButton((600, 60, 25, 25), '12')
+
 
 # Set the height and width of the screen
 size=[width,height]
@@ -58,6 +69,7 @@ pygame.display.set_caption("Professor Craven's Cool Game")
 done=False
 clock = pygame.time.Clock()
 calculated = False
+wrapper = PyWrapperPointSet()
 
 while done==False:
  
@@ -69,10 +81,9 @@ while done==False:
         if event.type == pygame.QUIT: # If user clicked close
             done=True # Flag that we are done so we exit this loop
         
-        # Recalculate points if click on the button
+        
         if 'click' in buttonGo.handleEvent(event):
                 prePointsXY = []
-                wrapper = PyWrapperPointSet()
                 wrapper.go(N, whichNonLin1, whichNonLin2,
                     whichNonLin3, whichNonLin4, whichNonLin5,
                     whichNonLin6, whichNonLin7, whichNonLin8,
@@ -80,7 +91,7 @@ while done==False:
                     whichNonLin12, numLin)
                 pointsX = wrapper.getPointsX()
                 pointsY = wrapper.getPointsY()
-                for i in range(N):
+                for i in range(len(pointsX)):
                     prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
                 # Count the number of points
                 pointsXY = defaultdict(int)
@@ -88,8 +99,83 @@ while done==False:
                     pointsXY[((int)(a*width),(int)(b*height))] +=1
                 maxHit = max(pointsXY.values())
                 color = range(maxHit)
-                color = [(int)(((i+1)*250)/(max(color)+1)) for i in color]
+                color = [((int)((i+1)*255/(maxHit+1)),(int)((i+1)*255/(maxHit+1)),
+                    (int)((i+1)*255/(maxHit+1))) for i in color]
                 calculated = True
+
+        # Controls the behavior of the 12 buttons on non linear trans
+        if 'click' in button1.handleEvent(event):
+            whichNonLin1 = 1 - whichNonLin1
+            if whichNonLin1==1:
+                button1.bgcolor = GRAY
+            else:
+                button1.bgcolor = LIGHTGRAY
+        if 'click' in button2.handleEvent(event):
+            whichNonLin2 = 1 - whichNonLin2
+            if whichNonLin2==1:
+                button2.bgcolor = GRAY
+            else:
+                button2.bgcolor = LIGHTGRAY
+        if 'click' in button3.handleEvent(event):
+            whichNonLin3 = 1 - whichNonLin3
+            if whichNonLin3==1:
+                button3.bgcolor = GRAY
+            else:
+                button3.bgcolor = LIGHTGRAY
+        if 'click' in button4.handleEvent(event):
+            whichNonLin4 = 1 - whichNonLin4
+            if whichNonLin4==1:
+                button4.bgcolor = GRAY
+            else:
+                button4.bgcolor = LIGHTGRAY
+        if 'click' in button5.handleEvent(event):
+            whichNonLin5 = 1 - whichNonLin5
+            if whichNonLin5==1:
+                button5.bgcolor = GRAY
+            else:
+                button5.bgcolor = LIGHTGRAY
+        if 'click' in button6.handleEvent(event):
+            whichNonLin6 = 1 - whichNonLin6
+            if whichNonLin6==1:
+                button6.bgcolor = GRAY
+            else:
+                button6.bgcolor = LIGHTGRAY
+        if 'click' in button7.handleEvent(event):
+            whichNonLin7 = 1 - whichNonLin7
+            if whichNonLin7==1:
+                button7.bgcolor = GRAY
+            else:
+                button7.bgcolor = LIGHTGRAY
+        if 'click' in button8.handleEvent(event):
+            whichNonLin8 = 1 - whichNonLin8
+            if whichNonLin8==1:
+                button8.bgcolor = GRAY
+            else:
+                button8.bgcolor = LIGHTGRAY
+        if 'click' in button9.handleEvent(event):
+            whichNonLin9 = 1 - whichNonLin9
+            if whichNonLin9==1:
+                button9.bgcolor = GRAY
+            else:
+                button9.bgcolor = LIGHTGRAY
+        if 'click' in button10.handleEvent(event):
+            whichNonLin10 = 1 - whichNonLin10
+            if whichNonLin10==1:
+                button10.bgcolor = GRAY
+            else:
+                button10.bgcolor = LIGHTGRAY
+        if 'click' in button11.handleEvent(event):
+            whichNonLin11 = 1 - whichNonLin11
+            if whichNonLin11==1:
+                button11.bgcolor = GRAY
+            else:
+                button11.bgcolor = LIGHTGRAY
+        if 'click' in button12.handleEvent(event):
+            whichNonLin12 = 1 - whichNonLin12
+            if whichNonLin12==1:
+                button12.bgcolor = GRAY
+            else:
+                button12.bgcolor = LIGHTGRAY
 
     # All drawing code happens after the for loop and but
     # inside the main while done==False loop.
@@ -97,23 +183,28 @@ while done==False:
     # Clear the screen and set the screen background
     screen.fill(white)
     buttonGo.draw(screen)
+    button1.draw(screen)
+    button2.draw(screen)
+    button3.draw(screen)
+    button4.draw(screen)
+    button5.draw(screen)
+    button6.draw(screen)
+    button7.draw(screen)
+    button8.draw(screen)
+    button9.draw(screen)
+    button10.draw(screen)
+    button11.draw(screen)
+    button12.draw(screen)
+
  
     if calculated:
         # Draw points
         for (a,b) in pointsXY.keys():
     	   # print(a,b)
-    	   pygame.draw.rect(screen,[255-color[pointsXY[(a,b)]-1],0,0],[a,b,2,2])
+    	   pygame.draw.rect(screen,color[pointsXY[(a,b)]-1],[a,b,2,2])
      
     # Select the font to use. Default font, 25 pt size.
     font = pygame.font.Font(None, 25)
- 
-    # Render the text. "True" means anti-aliased text. 
-    # Black is the color. This creates an image of the 
-    # letters, but does not put it on the screen
-    text = font.render("My text",True,black)
- 
-    # Put the image of the text on the screen at 250x250
-    screen.blit(text, [250,250])
  
     # Go ahead and update the screen with what we've drawn.
     # This MUST happen after all the other drawing commands.
