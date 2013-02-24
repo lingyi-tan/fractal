@@ -27,8 +27,8 @@ bool Output::writeTxt(bool overWrite) {
     if (_name.empty()) return false;
     string fileName = _name;
     ofstream myfile (fileName);
-    if (overWrite) myfile.seekp(ios::beg);
-    else myfile.seekp(ios::end);
+    if (overWrite) myfile.seekp(ios::trunc);
+    else myfile.seekp(ios::app);
     
     if (myfile.is_open()) {
         for (int i = 0; i < _data->size(); i++ )

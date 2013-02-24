@@ -27,7 +27,7 @@ public:
     void _test_vector();
     void _test_random();
     void _test_transform();
-    void _test_pointProcess();
+    void _test_pointProcess( Parameters & );
     void _test_qt();
     void _test_output();
 };

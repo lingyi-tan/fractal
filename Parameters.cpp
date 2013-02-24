@@ -51,9 +51,32 @@ std::vector<numty> Parameters::getPostTrans() const{
     return _postTrans;
 }
 
-// does not do anything !!!
-void Parameters::update() {
-    // simple update, DEBUG purpose
+// updata parameters through specifying which non linear trans to be used, and how many non linear to be used.
+void Parameters::update(std::vector<bool> whichNonLin, int numLin, int Nsim) {
+    // the length of the bool vector has to be 12
+    _Nsim = Nsim;
+    numty normConst = 0;
+    for (int i = 0; i <12; i++) normConst += numty(whichNonLin[i]);
+    for (int i = 0; i<12; i++){
+        _probNonLin.at(i) = numty(whichNonLin[i])/normConst;
+    }
+
+    _probLin.assign(12, 0);
+    for (int i = 0; i<numLin; i++)
+        _probLin.at(i) = 1/float(numLin);
+    
+    // generate linear parameters in a random way
+    std::vector<numty> tmp;
+    tmp.assign(60, 0);
+    for (int i = 0; i<60; i++) tmp.at(i) = numty(rand()%RANGE)/RANGE;
+    for (int i = 0; i<12; i++){
+        _preTrans[i].at(0) = tmp.at(5*i)*cosf(tmp.at(5*i+2));
+        _preTrans[i].at(1) = -tmp.at(5*i+1)*sinf(tmp.at(5*i+2));
+        _preTrans[i].at(2) = tmp.at(5*i+3);
+        _preTrans[i].at(3) = tmp.at(5*i)*sinf(tmp.at(5*i+1));
+        _preTrans[i].at(4) = tmp.at(5*i+1)*cosf(tmp.at(5*i+2));
+        _preTrans[i].at(2) = tmp.at(5*i+4);
+    }
 
 }
 

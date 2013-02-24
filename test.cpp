@@ -46,8 +46,7 @@ void Test::_test_transform() {
     std::cout<<"voila"<<std::endl;
 }
 
-void Test::_test_pointProcess(){
-    Parameters para;
+void Test::_test_pointProcess( Parameters & para){
     Transformation newTrans(para);
     newTrans.push(0.5,0.5);
     PointProcess newProcess;
@@ -55,16 +54,16 @@ void Test::_test_pointProcess(){
     std::vector<numty> ycord;
     std::cout<<"start !"<<std::endl;
     for (int r = 0 ; r < 2; r++) {
-        newProcess.start(2000, para);
+        newProcess.start(20, para);
         xcord = newProcess.getXcord();
         ycord = newProcess.getYcord();
-        std::string fileX = "/Users/bunny/geek/test/fractal/datax2.txt";
-        std::string fileY = "/Users/bunny/geek/test/fractal/datay2.txt";
+        /*std::string fileX = "/Users/bunny/geek/test/fractal/ikikix.txt";
+        std::string fileY = "/Users/bunny/geek/test/fractal/ikikiy.txt";
         
         Output outX(xcord, fileX);
         outX.writeTxt(false);
         Output outY(ycord, fileY);
-        outY.writeTxt(false);
+        outY.writeTxt(false);*/
 
         std::cout<<"iteration :" <<r;
         

@@ -30,18 +30,18 @@ int main(int argc, char * argv[]){
     
     // 1. initialize parameters
     
-    static Parameters para;
-    para.update();
+    Parameters para;
+    std::vector<bool> inNonLin = {0,0,0,0, 1,0,1,0, 0,1,0,0};
+    para.update(inNonLin, 4, 500);
     
     // 2. initialize transformation
     
-    testNew._test_transform();
+  //  testNew._test_transform();
     
     // 3. point process
    
-    testNew._test_pointProcess();
-    
-     
+    testNew._test_pointProcess(para);
+        
    // 4. point set
     //PointSet pointset(20000, rgen, para);
     //pointset.runProcess();

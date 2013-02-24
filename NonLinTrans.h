@@ -22,8 +22,10 @@ inline numty norm(numty x, numty y){
 
 // 1
 static void sinus (const numty x , const numty y, numty * output){
-    output[0] = sinf(x);
-    output[1] = sinf(y);
+    //output[0] = sinf(x);
+    //output[1] = sinf(y);
+    output[0] = x;
+    output[1] = y;
 }
 
 // 2
