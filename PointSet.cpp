@@ -28,7 +28,7 @@ void PointSet::runProcess(){
 //        std::cout<<i<<std::endl;
         PointProcess point;
         point.start(_Nsim, _para);
-        pointReceiver(point.getXcord(),point.getXcord());
+        pointReceiver(point.getXcord(),point.getYcord());
     }
 }
 
