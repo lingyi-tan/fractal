@@ -43,17 +43,23 @@ void PointProcess::start(int iter, Parameters & pparam){
     _ytraj.clear();
     numty tmpx = 0;
     numty tmpy = 0;
+<<<<<<< HEAD
+    
+=======
 //    srand(time(NULL));
 
+>>>>>>> 169d168bd7cf67787b16553bfcda6a06fffb4fc7
     Transformation transformer(pparam);
     
     for (int it = 0; it < iter; it ++){
+        _xtraj.push_back(2*float(rand()%RANGE)/RANGE-1);
+        _ytraj.push_back(2*float(rand()%RANGE)/RANGE-1);
 // debug use
 //        std::cout<<"\n *** new point --- x:"<<_xtraj.back()<<", y-"<<_ytraj.back();
 //        std::cout<<"\nstart point:\n ";
-                
-        tmpx = 2*float(rand()%RANGE)/RANGE-1;
-        tmpy = 2*float(rand()%RANGE)/RANGE-1;
+        
+        
+        tmpx = _xtraj.back(); tmpy = _ytraj.back();
         for (int i = 0; i < MAXWALK; i++){
             transformer.push(tmpx,tmpy);
             /*transformer.preTrans();
