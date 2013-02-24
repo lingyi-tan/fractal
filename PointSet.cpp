@@ -11,9 +11,9 @@
 #include "PointSet.h"
 
 PointSet::PointSet(int n, Parameters &para){
-    std::cout<<n<<std::endl;
+//    std::cout<<n<<std::endl;
     _Nsim = n;
-    std::cout<<_Nsim<<std::endl;
+//    std::cout<<_Nsim<<std::endl;
     _para = para;
     runProcess();
 }
@@ -23,7 +23,7 @@ PointSet::~PointSet(){
 }
 
 void PointSet::runProcess(){
-    std::cout<<_Nsim<<std::endl;
+//    std::cout<<_Nsim<<std::endl;
     for (int i = 0;i<_Nsim;i++){
 //        std::cout<<i<<std::endl;
         PointProcess point;

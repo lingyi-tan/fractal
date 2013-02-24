@@ -10,7 +10,7 @@
 
 WrapperPointSet::WrapperPointSet(){
 
-    std::cout <<_nsim<<std::endl;
+//    std::cout <<_nsim<<std::endl;
     srand(time(NULL));
     std::vector<numty> _prepointsX;
     std::vector<numty> _prepointsY;
