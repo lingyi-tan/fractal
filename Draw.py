@@ -7,8 +7,9 @@
 import pygame
 import random
 from collections import defaultdict
-import os, sys
+import sys
 from pygame.locals import *
+import pygbutton
 from psWrapper import PyWrapperPointSet
  
 # Initialize the game engine
@@ -23,30 +24,29 @@ red =   [255,  0,  0]
 DARKGRAY  = ( 64,  64,  64)
 GRAY      = (128, 128, 128)
 LIGHTGRAY = (212, 208, 200)
-
+N = 30000
+whichNonLin1 = 0
+whichNonLin2 = 1
+whichNonLin3 = 0
+whichNonLin4 = 0
+whichNonLin5 = 0
+whichNonLin6 = 0
+whichNonLin7 = 1
+whichNonLin8 = 0
+whichNonLin9 = 1
+whichNonLin10 = 0
+whichNonLin11 = 0
+whichNonLin12 = 0
+numLin = 4
 
 width = 400
 height = 500
 
-# Random example
-# prePointsXY = []
-# for i in range(100000):
-# 	prePointsXY.append( (random.uniform(-1,1),random.uniform(-1,1)) )
-
-# Time of truth
-wrapper = PyWrapperPointSet()
-wrapper.go(100)
-wrapper.go(100)
-pointsX = wrapper.getPointsX()
-pointsY = wrapper.getPointsY()
-prePointsXY = []
-for i in range(1000):
-   prePointsXY.append( (pointsX[i],pointsY[i]) )
-
-# Count the number of points
-pointsXY = defaultdict(int)
-for (a,b) in prePointsXY:
-	pointsXY[((int)((a*width+width))/2,(int)((b*height+height))/2)] +=1
+# Create a button
+FPS = 30
+WINDOWWIDTH = 380
+WINDOWHEIGHT = 350
+buttonGo = pygbutton.PygButton((50, 50, 60, 30), 'White')
 
 # Set the height and width of the screen
 size=[width,height]
@@ -57,11 +57,8 @@ pygame.display.set_caption("Professor Craven's Cool Game")
 #Loop until the user clicks the close button.
 done=False
 clock = pygame.time.Clock()
-maxHit = max(pointsXY.values())
-color = range(maxHit)
+calculated = False
 
-color = [(int)(((i+1)*250)/(max(color)+1)) for i in color]
-# print(color) 
 while done==False:
  
     # This limits the while loop to a max of 10 times per second.
@@ -71,17 +68,41 @@ while done==False:
     for event in pygame.event.get(): # User did something
         if event.type == pygame.QUIT: # If user clicked close
             done=True # Flag that we are done so we exit this loop
- 
+        
+        # Recalculate points if click on the button
+        if 'click' in buttonGo.handleEvent(event):
+                prePointsXY = []
+                wrapper = PyWrapperPointSet()
+                wrapper.go(N, whichNonLin1, whichNonLin2,
+                    whichNonLin3, whichNonLin4, whichNonLin5,
+                    whichNonLin6, whichNonLin7, whichNonLin8,
+                    whichNonLin9, whichNonLin10, whichNonLin11,
+                    whichNonLin12, numLin)
+                pointsX = wrapper.getPointsX()
+                pointsY = wrapper.getPointsY()
+                for i in range(N):
+                    prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
+                # Count the number of points
+                pointsXY = defaultdict(int)
+                for (a,b) in prePointsXY:
+                    pointsXY[((int)(a*width),(int)(b*height))] +=1
+                maxHit = max(pointsXY.values())
+                color = range(maxHit)
+                color = [(int)(((i+1)*250)/(max(color)+1)) for i in color]
+                calculated = True
+
     # All drawing code happens after the for loop and but
     # inside the main while done==False loop.
      
     # Clear the screen and set the screen background
     screen.fill(white)
+    buttonGo.draw(screen)
  
-    # Draw a rectangle
-    for (a,b) in pointsXY.keys():
-    	# print(a,b)
-    	pygame.draw.rect(screen,[255-color[pointsXY[(a,b)]-1],0,0],[a,b,2,2])
+    if calculated:
+        # Draw points
+        for (a,b) in pointsXY.keys():
+    	   # print(a,b)
+    	   pygame.draw.rect(screen,[255-color[pointsXY[(a,b)]-1],0,0],[a,b,2,2])
      
     # Select the font to use. Default font, 25 pt size.
     font = pygame.font.Font(None, 25)
