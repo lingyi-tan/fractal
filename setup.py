@@ -5,13 +5,12 @@ from Cython.Build import cythonize
 setup(
   name = 'MyProject',
   cmdclass = {'build_ext': build_ext},
-  language = "c++",
-  ext_modules=[Extension("psWrapper", 
+  ext_modules=cythonize([Extension("psWrapper", 
   	["psWrapper.pyx", 
-  	"WrapperPointSet.cpp",
-  	"Parameters.cpp", 
-  	"utilities.cpp", 
-  	"PointSet.cpp", 
-  	"NonLinTrans.cpp", 
-  	"PointProcess.cpp", 
-  	"Transformation.cpp"])])
+  	"./WrapperPointSet.cpp",
+  	"./Parameters.cpp", 
+  	"./utilities.cpp", 
+  	"./PointSet.cpp", 
+  	"./NonLinTrans.cpp", 
+  	"./PointProcess.cpp", 
+  	"./Transformation.cpp"])]))
