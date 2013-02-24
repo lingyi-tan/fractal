@@ -43,7 +43,8 @@ void PointProcess::start(int iter, Parameters & pparam){
     _ytraj.clear();
     numty tmpx = 0;
     numty tmpy = 0;
-    
+//    srand(time(NULL));
+
     Transformation transformer(pparam);
     
     for (int it = 0; it < iter; it ++){

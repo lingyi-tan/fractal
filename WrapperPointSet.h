@@ -20,9 +20,9 @@ class WrapperPointSet{
         std::vector<numty> _prepointsY; //table of the positions of the points received from PointProcess
         
     public:
-        WrapperPointSet(int);
+        WrapperPointSet();
         ~WrapperPointSet();
-        void go();
+        void go(int);
         std::vector<numty> getPointsX(); //provides the X values of the points
         std::vector<numty> getPointsY(); //provides the Y values of the points
 };

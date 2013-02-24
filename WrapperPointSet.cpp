@@ -8,14 +8,22 @@
 
 #include "WrapperPointSet.h"
 
-WrapperPointSet::WrapperPointSet(int N){
-    int _nsim = N;
+WrapperPointSet::WrapperPointSet(){
+
+//    std::cout <<_nsim<<std::endl;
     srand(time(NULL));
     std::vector<numty> _prepointsX;
     std::vector<numty> _prepointsY;
 }
 
-void WrapperPointSet::go(){
+WrapperPointSet::~WrapperPointSet(){
+
+}
+
+
+void WrapperPointSet::go(int N){
+    _nsim = N;
+//    std::cout <<_nsim<<std::endl;
     Parameters para;
 //    para.update();
     PointSet pointset(_nsim, para);
@@ -24,7 +32,12 @@ void WrapperPointSet::go(){
 }
 
 std::vector<numty> WrapperPointSet::getPointsX(){
+//    std::cout<<30<<std::endl;
     std::vector<numty> x = _prepointsX;
+//    for (unsigned i=0; i<(30-20)*_nsim; i++){
+//        std::cout<<x[i]<<std::endl;
+//        _prepointsX.push_back(x[i]);
+//    }
     return x;
 }
 
