@@ -61,10 +61,10 @@ void Test::_test_pointProcess(){
         std::string fileX = "/Users/bunny/geek/test/fractal/datax2.txt";
         std::string fileY = "/Users/bunny/geek/test/fractal/datay2.txt";
         
-        Output outX(xcord, fileX);
-        outX.writeTxt(false);
-        Output outY(ycord, fileY);
-        outY.writeTxt(false);
+//        Output outX(xcord, fileX);
+//        outX.writeTxt(false);
+//        Output outY(ycord, fileY);
+//        outY.writeTxt(false);
 
         std::cout<<"iteration :" <<r;
         
@@ -92,8 +92,8 @@ void Test::_test_output() {
     for (int i = 0; i < 200; i++)
         trydata.push_back(i*i);
     std::string name = "/Users/bunny/geek/test/fractal/myoutput";
-    Output newOut(trydata, name);
-    std::cout<<newOut.writeTxt(true)<<std::endl;
+//    Output newOut(trydata, name);
+//    std::cout<<newOut.writeTxt(true)<<std::endl;
 }
 
 /*void Test::_test_random(Rgen & gen) {

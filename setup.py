@@ -1,8 +1,17 @@
-from distutils.core import setup
+from distutils.core import setup, Extension
+from Cython.Distutils import build_ext
 from Cython.Build import cythonize
 
-setup(ext_modules = cythonize(
-           "rect.pyx",                 # our Cython source
-           sources=["utilites.cpp"],  # additional source file(s)
-           language="c++",             # generate C++ code
-      ))
+setup(
+  name = 'MyProject',
+  cmdclass = {'build_ext': build_ext},
+  language = "c++",
+  ext_modules=[Extension("psWrapper", 
+  	["psWrapper.pyx", 
+  	"WrapperPointSet.cpp",
+  	"Parameters.cpp", 
+  	"utilities.cpp", 
+  	"PointSet.cpp", 
+  	"NonLinTrans.cpp", 
+  	"PointProcess.cpp", 
+  	"Transformation.cpp"])])

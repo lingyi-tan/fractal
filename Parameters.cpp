@@ -52,9 +52,9 @@ std::vector<numty> Parameters::getPostTrans() const{
 }
 
 // does not do anything !!!
-void Parameters::update() {
+//void Parameters::update() {
     // simple update, DEBUG purpose
 
-}
+//}u
 
 // still need to define function isContract

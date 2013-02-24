@@ -17,7 +17,7 @@ WrapperPointSet::WrapperPointSet(int N){
 
 void WrapperPointSet::go(){
     Parameters para;
-    para.update();
+//    para.update();
     PointSet pointset(_nsim, para);
     _prepointsX = pointset.getPointsX();
     _prepointsY = pointset.getPointsY();

@@ -31,7 +31,7 @@ int main(int argc, char * argv[]){
     // 1. initialize parameters
     
     static Parameters para;
-    para.update();
+//    para.update();
     
     // 2. initialize transformation
     
