@@ -58,6 +58,28 @@ button10 = pygbutton.PygButton((500, 60, 25, 25), '10')
 button11 = pygbutton.PygButton((550, 60, 25, 25), '11')
 button12 = pygbutton.PygButton((600, 60, 25, 25), '12')
 
+# Define the colorCon : the function which controls the coloring behavior
+def linearStep(i):
+    if i>1:
+        y = 0
+    elif i<0:
+        y = 0
+    elif i>=0.6667:
+        y = 0   
+    elif i<=0.3333:
+        y = i*3
+    else:
+        y = (0.6667-i)*3
+    return y
+
+def colorCon(i, colorCode):
+    if colorCode==1:
+        return (int)(linearStep(i)*255)
+    elif colorCode==2:
+        return (int)(linearStep(i-0.1667)*255)
+    else:
+        return (int)(linearStep(i-0.3333)*255)
+
 
 # Set the height and width of the screen
 size=[width,height]
@@ -81,27 +103,33 @@ while done==False:
         if event.type == pygame.QUIT: # If user clicked close
             done=True # Flag that we are done so we exit this loop
         
-        
         if 'click' in buttonGo.handleEvent(event):
-                prePointsXY = []
-                wrapper.go(N, whichNonLin1, whichNonLin2,
-                    whichNonLin3, whichNonLin4, whichNonLin5,
-                    whichNonLin6, whichNonLin7, whichNonLin8,
-                    whichNonLin9, whichNonLin10, whichNonLin11,
-                    whichNonLin12, numLin)
-                pointsX = wrapper.getPointsX()
-                pointsY = wrapper.getPointsY()
-                for i in range(len(pointsX)):
-                    prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
-                # Count the number of points
-                pointsXY = defaultdict(int)
-                for (a,b) in prePointsXY:
-                    pointsXY[((int)(a*width),(int)(b*height))] +=1
-                maxHit = max(pointsXY.values())
-                color = range(maxHit)
-                color = [((int)((i+1)*255/(maxHit+1)),(int)((i+1)*255/(maxHit+1)),
-                    (int)((i+1)*255/(maxHit+1))) for i in color]
-                calculated = True
+            prePointsXY = []
+            wrapper.go(N, whichNonLin1, whichNonLin2,
+                whichNonLin3, whichNonLin4, whichNonLin5,
+                whichNonLin6, whichNonLin7, whichNonLin8,
+                whichNonLin9, whichNonLin10, whichNonLin11,
+                whichNonLin12, numLin)
+            pointsX = wrapper.getPointsX()
+            pointsY = wrapper.getPointsY()
+            calculated = True
+            length = len(pointsX)
+            # print len(pointsX)
+            # for i in range(len(pointsX)):
+            #     prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
+            #     # Count the number of points
+            # pointsXY = defaultdict(int)
+            # for (a,b) in prePointsXY:
+            #     pointsXY[((int)(a*width),(int)(b*height))] +=1
+            # print len(pointsXY.keys())
+            # maxHit = max(pointsXY.values())
+            # numberHits = range(maxHit)
+            # color = []
+            # for i in numberHits:
+            #     j = (float)(i+1)/(maxHit+1)/2+0.25
+            #     color.append((colorCon(j,1),
+            #         colorCon(j,2),colorCon(j,3)))
+                
 
         # Controls the behavior of the 12 buttons on non linear trans
         if 'click' in button1.handleEvent(event):
@@ -198,11 +226,15 @@ while done==False:
 
  
     if calculated:
-        # Draw points
-        for (a,b) in pointsXY.keys():
-    	   # print(a,b)
-    	   pygame.draw.rect(screen,color[pointsXY[(a,b)]-1],[a,b,2,2])
-     
+        # # Draw points
+        # for (a,b) in pointsXY.keys():
+    	   # pygame.draw.rect(screen,color[pointsXY[(a,b)]-1],[a,b,2,2])
+        for i in range(length):
+            j = (float)(i)/length
+            color = (colorCon(j,1),
+                colorCon(j,2),colorCon(j,3))
+            # print(color)
+            pygame.draw.rect(screen,color,[(int)((pointsX[i]/4+0.5)*width),(int)((pointsY[i]/4+0.5)*height),2,2])
     # Select the font to use. Default font, 25 pt size.
     font = pygame.font.Font(None, 25)
  
