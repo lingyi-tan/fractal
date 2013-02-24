@@ -15,7 +15,7 @@
 Parameters::Parameters(){
     _postTrans.assign(6, 0);
     _postTrans.at(0) = _postTrans.at(4) = 1;
-    for (int k = 0; k<12; k++) {
+    for (int k = 0; k<100; k++) {
         _preTrans[k].assign(6, 0);
         _preTrans[k].at(0) = _preTrans[k].at(4) = 0.5;
         _preTrans[k].at(5) = 0.5*(k%4==0);
@@ -24,7 +24,7 @@ Parameters::Parameters(){
     }
     _probNonLin.assign(12, 0);
     _probNonLin.at(0) = 1;
-    _probLin.assign(12, 1.0/12.0);
+    _probLin.assign(100, 1.0/100.0);
     _k = 1;
     
 }
@@ -60,21 +60,21 @@ void Parameters::update(std::vector<bool> whichNonLin, int numLin) {
         _probNonLin.at(i) = numty(whichNonLin[i])/normConst;
     }
 
-    _probLin.assign(12, 0);
+    _probLin.assign(numLin, 0);
     for (int i = 0; i<numLin; i++)
         _probLin.at(i) = 1/float(numLin);
     
     // generate linear parameters in a random way
     std::vector<numty> tmp;
-    tmp.assign(60, 0);
-    for (int i = 0; i<60; i++) tmp.at(i) = numty(rand()%RANGE)/RANGE;
-    for (int i = 0; i<12; i++){
+    tmp.assign(5*numLin, 0);
+    for (int i = 0; i<5*numLin; i++) tmp.at(i) = numty(rand()%RANGE)/RANGE;
+    for (int i = 0; i<numLin; i++){
         _preTrans[i].at(0) = (0.25+0.75*tmp.at(5*i))*cosf(tmp.at(5*i+2));
         _preTrans[i].at(1) = -(0.25+0.75*tmp.at(5*i+1))*sinf(tmp.at(5*i+2));
         _preTrans[i].at(2) = tmp.at(5*i+3);
         _preTrans[i].at(3) = (0.25+0.75*tmp.at(5*i))*sinf(tmp.at(5*i+1));
         _preTrans[i].at(4) = (0.25+0.75*tmp.at(5*i+1))*cosf(tmp.at(5*i+2));
-        _preTrans[i].at(2) = tmp.at(5*i+4);
+        _preTrans[i].at(5) = tmp.at(5*i+4);
     }
 
 }

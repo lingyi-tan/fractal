@@ -17,7 +17,7 @@ class Parameters {
     int _k;  // number of chosen non linear transformation functions
     std::vector<numty> _probNonLin; // probability attributed to each non linear transformation
     std::vector<numty> _probLin; // probability of linear transformation
-    std::vector<numty> _preTrans[12];  // matrices of pre-linear-transformation
+    std::vector<numty> _preTrans[100];  // matrices of pre-linear-transformation
     // the number of pre- transformation should equal the number of non- linear - transformation.
     std::vector<numty> _postTrans; // matrix of post-linear-transformation
     

@@ -15,7 +15,7 @@
 #define BOTTOM -2
 #define TINY 0.00001
 #define BIG 10000
-#define RANGE 50
+#define RANGE 500
 
 #include <iostream>
 #include <vector>

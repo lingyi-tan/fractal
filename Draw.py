@@ -25,7 +25,7 @@ def main():
     DARKGRAY  = ( 64,  64,  64)
     GRAY      = (128, 128, 128)
     LIGHTGRAY = (212, 208, 200)
-    N = 10000
+    N = 30000
     whichNonLin1 = 0
     whichNonLin2 = 0
     whichNonLin3 = 0
@@ -38,7 +38,9 @@ def main():
     whichNonLin10 = 0
     whichNonLin11 = 0
     whichNonLin12 = 0
-    numLin = 10
+    numLin = 100
+
+    colorInc = 3
 
     width = 800
     height = 600
@@ -47,7 +49,6 @@ def main():
     buttonGo = pygbutton.PygButton((width-155, 60, 50, 25), 'Go')
     # Create a button to save image
     buttonSave = pygbutton.PygButton((width-95, 60, 50, 25), 'Save')
-    coloringSquare = 5
 
     # Create 12 buttons to control the type of non linear transformations to use
     button1 = pygbutton.PygButton((50, 60, 25, 25), '1')
@@ -135,15 +136,9 @@ def main():
                 hitNumberXY = defaultdict(int)
                 pointsXY = defaultdict(int)
                 for (a,b) in prePointsXY:
-                    hitNumberXY[((int)(a*width),(int)(b*(height-100)+100))] +=1
-                    hitNumberXY[((int)(a*width)+1,(int)(b*(height-100)+100))] +=1
-                    hitNumberXY[((int)(a*width)-1,(int)(b*(height-100)+100))] +=1
-                    hitNumberXY[((int)(a*width)+1,(int)(b*(height-100)+100+1))] +=1
-                    hitNumberXY[((int)(a*width)-1,(int)(b*(height-100)+100+1))] +=1
-                    hitNumberXY[((int)(a*width)+1,(int)(b*(height-100)+100-1))] +=1
-                    hitNumberXY[((int)(a*width)-1,(int)(b*(height-100)+100-1))] +=1
-                    hitNumberXY[((int)(a*width),(int)(b*(height-100)+100-1))] +=1
-                    hitNumberXY[((int)(a*width),(int)(b*(height-100)+100+1))] +=1
+                    for j in range(colorInc):
+                        for k in range(colorInc):
+                            hitNumberXY[((int)(a*width)+j,(int)(b*(height-100)+100+k))] +=1
                     pointsXY[((int)(a*width),(int)(b*(height-100)+100))] = 1
                 print len(pointsXY.keys())
                 maxHit = max(hitNumberXY.values())
@@ -257,8 +252,12 @@ def main():
      
         if calculated:
             # # Draw points
+            drawnPoints = 0
             for (a,b) in pointsXY.keys():
-        	   pygame.draw.rect(screen,color[hitNumberXY[(a,b)]-1],[a,b,2,2])
+                drawnPoints +=1
+                pygame.draw.rect(screen,color[hitNumberXY[(a,b)]-1],[a,b,1,1],1)
+                if drawnPoints >50000:
+                    break
             # for i in range(length):
             #     j = (float)(i)/length
             #     color = (colorCon(j,1),
