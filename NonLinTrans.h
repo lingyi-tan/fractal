@@ -35,8 +35,8 @@ static void spheric (const numty x , const numty y , numty * output){
         output[0] = output[1] = 0;
         return;
     }
-    output[0] = x/r;
-    output[1] = y/r;
+    output[0] = x/r/r;
+    output[1] = y/r/r;
 }
 
 // 3
@@ -66,7 +66,7 @@ static void polar (const numty x , const numty y , numty * output){
 static void hankerchief (const numty x , const numty y , numty * output){
     numty r = norm(x,y);
     output[0] = r * sinf(atanf(y/x) + r);
-    output[1] = r * cosf(atanf(y/x) + r);
+    output[1] = r * cosf(atanf(y/x) - r);
 }
 
 // 7
@@ -90,7 +90,7 @@ static void spiral (const numty x , const numty y , numty * output){
         output[0] = output[1] = 0;
         return;
     }
-    output[0] = (sinf(atanf(y/x)) + cosf(r))/r;
+    output[0] = (cosf(atanf(y/x)) + sinf(r))/r;
     output[1] = (sinf(atanf(y/x)) - cosf(r))/r;
 }
 
