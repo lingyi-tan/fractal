@@ -93,7 +93,7 @@ def main():
     size=[width,height]
     screen=pygame.display.set_mode(size)
      
-    pygame.display.set_caption("Professor Craven's Cool Game")
+    pygame.display.set_caption("M & T's flame fractal !")
      
     #Loop until the user clicks the close button.
     done=False
@@ -145,7 +145,7 @@ def main():
                 numberHits = range(maxHit)
                 color = []
                 for i in numberHits:
-                    j = (float)(i+1)/(maxHit+1)/2+0.25
+                    j = (float)((i+1)/(maxHit+1)/2+0.25)^0.5
                     color.append((colorCon(j,1),
                         colorCon(j,2),colorCon(j,3),j))
 

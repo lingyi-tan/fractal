@@ -65,22 +65,31 @@ static void polar (const numty x , const numty y , numty * output){
 // 6
 static void hankerchief (const numty x , const numty y , numty * output){
     numty r = norm(x,y);
-    output[0] = r * sinf(atanf(y/x) + r);
-    output[1] = r * cosf(atanf(y/x) - r);
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
+    output[0] = r * sinf(the + r);
+    output[1] = r * cosf(the - r);
 }
 
 // 7
 static void heart (const numty x , const numty y , numty * output){
     numty r = norm(x,y);
-    output[0] = r * sinf(atanf(y/x)*r);
-    output[1] = -r * cosf(atanf(y/x)*r);
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
+    output[0] = r * sinf(the*r);
+    output[1] = -r * cosf(the*r);
 }
 
 // 8
 static void disc (const numty x , const numty y , numty * output){
     numty r = norm(x,y);
-    output[0] = atanf(y/x) * sinf(M_PI*r)/M_PI;
-    output[1] = atanf(y/x) * cosf(M_PI*r)/M_PI;
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
+    output[0] = the * sinf(M_PI*r)/M_PI;
+    output[1] = the * cosf(M_PI*r)/M_PI;
 }
 
 // 9
@@ -90,13 +99,19 @@ static void spiral (const numty x , const numty y , numty * output){
         output[0] = output[1] = 0;
         return;
     }
-    output[0] = (cosf(atanf(y/x)) + sinf(r))/r;
-    output[1] = (sinf(atanf(y/x)) - cosf(r))/r;
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
+    output[0] = (cosf(the) + sinf(r))/r;
+    output[1] = (sinf(the) - cosf(r))/r;
 }
 
 // 10
 static void hyperbolic (const numty x , const numty y , numty * output){
-    numty r = norm(x,y); numty the = atanf(y/x);
+    numty r = norm(x,y);
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
     if (r < TINY) {
         output[0] = output[1] = 0;
         return;
@@ -107,14 +122,20 @@ static void hyperbolic (const numty x , const numty y , numty * output){
 
 // 11
 static void diamond (const numty x , const numty y , numty * output){
-    numty r = norm(x,y); numty the = atanf(y/x);
+    numty r = norm(x,y);
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
     output[0] = sinf(the)*cosf(r);
     output[1] = cosf(the)*sinf(r);
 }
 
 // 12
 static void ex (const numty x , const numty y , numty * output){
-    numty r = norm(x,y); numty the = atanf(y/x);
+    numty r = norm(x,y);
+    numty the = 0;
+    if (x>0) the = atanf(y/x);
+    else if (x<0) the = M_PI + atanf(y/x);
     numty p0 = sinf(the+r); numty p1 = cosf(the + r);
     output[0] = r*(p0*p0*p0 + p1*p1*p1);
     output[1] = r*(p0*p0*p0 - p1*p1*p1);
