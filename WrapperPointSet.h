@@ -11,7 +11,6 @@
 
 #include "utilities.h"
 #include "Parameters.h"
-
 #include "PointProcess.h"
 
 class WrapperPointSet{

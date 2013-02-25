@@ -51,6 +51,7 @@ def main():
     height = 600
 
     current_string = [] # input string of number of linear transformations
+    save_dir = "" # directory to save images
     # Create a button
     buttonGo = pygbutton.PygButton((width-155, 60, 50, 25), 'Go')
     # Create a button to save image
@@ -72,6 +73,7 @@ def main():
 
     btnumlin = pygbutton.PygButton((50, 550, 20, 20), '')
     btNsim = pygbutton.PygButton((695, 550, 20, 20), '')
+    btSaveDir = pygbutton.PygButton((width-80, 30, 20, 20), '')
 
     # Create a box for number of linear transformations
     
@@ -158,7 +160,7 @@ def main():
                         for k in range(colorInc):
                             hitNumberXY[((int)(a*width)+j,(int)(b*(height-100)+100+k))] +=1
                     pointsXY[((int)(a*width),(int)(b*(height-100)+100))] = 1
-                print len(pointsXY.keys())
+                # print len(pointsXY.keys())
                 maxHit = max(hitNumberXY.values())
                 numberHits = range(maxHit)
                 color = []
@@ -169,8 +171,10 @@ def main():
 
             if 'click' in buttonSave.handleEvent(event):
                 clicktime = (list)(gmtime())
-                clicktime = [str(i) for i in clicktime]
-                pygame.image.save(screen, "%s.png" % ''.join(clicktime))
+                filename = [save_dir]
+                for i in clicktime:
+                    filename.append(str(i))
+                pygame.image.save(screen, "%s.png" % ''.join(filename))
                 
 
             # Controls the behavior of the 12 buttons on non linear trans
@@ -247,9 +251,11 @@ def main():
                 else:
                     button12.bgcolor = LIGHTGRAY
             if 'click' in btnumlin.handleEvent(event):
-                numLin = box_disp.test("number of linear")
+                numLin = (int)(box_disp.test("number of linear"))
             if 'click' in btNsim.handleEvent(event):
-                N = box_disp.test("number of initial points")
+                N = (int)(box_disp.test("number of initial points"))
+            if 'click' in btSaveDir.handleEvent(event):
+                save_dir = box_disp.test("directory to save image")
 
     
 
@@ -280,6 +286,7 @@ def main():
         button12.draw(screen)
         btnumlin.draw(screen)
         btNsim.draw(screen)
+        btSaveDir.draw(screen)
 
         # Select the font to use. Default font, 25 pt size.
         font = pygame.font.Font(None, 25)
@@ -291,12 +298,15 @@ def main():
       
         if calculated:
             # # Draw points
-            drawnPoints = 0
+            # drawnPoints = 0
+            
+            screen.blit(font.render(str(len(pointsXY.keys())), 1, (255,255,255)),
+                (390, 553))
             for (a,b) in pointsXY.keys():
-                drawnPoints +=1
+                # drawnPoints +=1
                 pygame.draw.rect(screen,color[hitNumberXY[(a,b)]-1],[a,b,1,1],1)
-                if drawnPoints >50000:
-                    break
+                # if drawnPoints >50000:
+                    # break
             # for i in range(length):
             #     j = (float)(i)/length
             #     color = (colorCon(j,1),
