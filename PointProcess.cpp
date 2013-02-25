@@ -52,8 +52,8 @@ void PointProcess::start(int iter, Parameters & pparam){
 //        std::cout<<"\n *** new point --- x:"<<_xtraj.back()<<", y-"<<_ytraj.back();
 //        std::cout<<"\nstart point:\n ";
                 
-        tmpx = 2*float(rand()%RANGE)/RANGE-1;
-        tmpy = 2*float(rand()%RANGE)/RANGE-1;
+        tmpx = 4*float(rand()%RANGE)/RANGE-2;
+        tmpy = 4*float(rand()%RANGE)/RANGE-2;
         for (int i = 0; i < MAXWALK; i++){
             transformer.push(tmpx,tmpy);
             /*transformer.preTrans();
