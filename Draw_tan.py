@@ -161,13 +161,14 @@ def main():
                             hitNumberXY[((int)(a*width)+j,(int)(b*(height-100)+100+k))] +=1
                     pointsXY[((int)(a*width),(int)(b*(height-100)+100))] = 1
                 # print len(pointsXY.keys())
-                maxHit = max(hitNumberXY.values())
-                numberHits = range(maxHit)
                 color = []
-                for i in numberHits:
-                    j = (float)(i+1)/(maxHit+1)/2+0.25
-                    color.append((colorCon(j,1),
-                        colorCon(j,2),colorCon(j,3),j))
+                if len(hitNumberXY.values())!=0:
+                    maxHit = max(hitNumberXY.values())
+                    numberHits = range(maxHit)
+                    for i in numberHits:
+                        j = (float)(i+1)/(maxHit+1)/2+0.25
+                        color.append((colorCon(j,1),
+                            colorCon(j,2),colorCon(j,3),j))
 
             if 'click' in buttonSave.handleEvent(event):
                 clicktime = (list)(gmtime())
