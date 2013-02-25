@@ -10,7 +10,6 @@ setup(
   	"./WrapperPointSet.cpp",
   	"./Parameters.cpp", 
   	"./utilities.cpp", 
-  	"./PointSet.cpp", 
   	"./NonLinTrans.cpp", 
   	"./PointProcess.cpp", 
   	"./Transformation.cpp"])]))
