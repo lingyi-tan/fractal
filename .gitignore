@@ -5,3 +5,4 @@ algofracto/.DS_Store
 ./.DS_Store
 .DS_Store
 *.orig
+*.pyc

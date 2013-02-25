@@ -132,7 +132,8 @@ def main():
             maxHit = max(hitNumberXY.values())
             numberHits = range(maxHit)
             for i in numberHits:
-                j = (float)(i+1)/(maxHit+1)/2+0.25
+                j = (float)(i+1)/(maxHit+1)/1.78+0.22
+                # j = (float)(i+1)/(maxHit+1)/2+0.25
                 color.append((colorCon(j,1),
                     colorCon(j,2),colorCon(j,3),j))
         # We return a dictionary with point position as keys
