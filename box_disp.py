@@ -44,6 +44,6 @@ def ask(screen, question):
 
 def test(message):
   screen = pygame.display.set_mode((800,600))
-  return (int)(ask(screen, message))
+  return ask(screen, message)
 
 # if __name__ == '__main__': main()
