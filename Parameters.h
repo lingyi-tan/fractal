@@ -26,7 +26,7 @@ public:
     ~Parameters();
    
     // pointer array pointing to 12 non linear transformations
-    void (* _nonLinTrans[12])(const numty, const numty, numty *) = {sinus, spheric, swirl, horseshoe, polar, hankerchief, heart, disc, spiral, hyperbolic, diamond, ex};
+    void (* _nonLinTrans[12])(const numty, const numty, numty *);
     
     void update(std::vector<bool> whichNonLin, int numLin); // better way to exchange with iostream?
     std::vector<numty> getProbaNonLin() const;

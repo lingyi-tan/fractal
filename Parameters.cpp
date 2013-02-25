@@ -13,6 +13,19 @@
 
 
 Parameters::Parameters(){
+    _nonLinTrans[0] = sinus;
+    _nonLinTrans[1] = spheric;
+    _nonLinTrans[2] = swirl;
+    _nonLinTrans[3] = horseshoe;
+    _nonLinTrans[4] = polar;
+    _nonLinTrans[5] = hankerchief;
+    _nonLinTrans[6] = heart;
+    _nonLinTrans[7] = disc;
+    _nonLinTrans[8] = spiral;
+    _nonLinTrans[9] = hyperbolic;
+    _nonLinTrans[10] = diamond;
+    _nonLinTrans[11] = ex;
+    
     _postTrans.assign(6, 0);
     _postTrans.at(0) = _postTrans.at(4) = 1;
     for (int k = 0; k<100; k++) {
@@ -69,11 +82,11 @@ void Parameters::update(std::vector<bool> whichNonLin, int numLin) {
     tmp.assign(5*numLin, 0);
     for (int i = 0; i<5*numLin; i++) tmp.at(i) = numty(rand()%RANGE)/RANGE;
     for (int i = 0; i<numLin; i++){
-        _preTrans[i].at(0) = (0.25+0.75*tmp.at(5*i))*cosf(tmp.at(5*i+2));
-        _preTrans[i].at(1) = -(0.25+0.75*tmp.at(5*i+1))*sinf(tmp.at(5*i+2));
+        _preTrans[i].at(0) = (0.25+0.725*tmp.at(5*i))*cosf(tmp.at(5*i+2)*2*M_PI);
+        _preTrans[i].at(1) = -(0.25+0.725*tmp.at(5*i+1))*sinf(tmp.at(5*i+2)*2*M_PI);
         _preTrans[i].at(2) = tmp.at(5*i+3);
-        _preTrans[i].at(3) = (0.25+0.75*tmp.at(5*i))*sinf(tmp.at(5*i+1));
-        _preTrans[i].at(4) = (0.25+0.75*tmp.at(5*i+1))*cosf(tmp.at(5*i+2));
+        _preTrans[i].at(3) = (0.25+0.725*tmp.at(5*i))*sinf(tmp.at(5*i+1)*2*M_PI);
+        _preTrans[i].at(4) = (0.25+0.725*tmp.at(5*i+1))*cosf(tmp.at(5*i+2)*2*M_PI);
         _preTrans[i].at(5) = tmp.at(5*i+4);
     }
 
