@@ -100,13 +100,55 @@ def main():
         else:
             return (int)(linearStep(i-0.3333)*255)
 
-    def get_key():
-            while 1:
-                event = pygame.event.poll()
-                if event.type == KEYDOWN:
-                    return event.key
-                else:
-                    pass 
+    def callWrapper(wrapper, N, whichNonLin1, whichNonLin2,
+                    whichNonLin3, whichNonLin4, whichNonLin5,
+                    whichNonLin6, whichNonLin7, whichNonLin8,
+                    whichNonLin9, whichNonLin10, whichNonLin11,
+                    whichNonLin12, numLin):
+        prePointsXY = []
+        wrapper.go(N, whichNonLin1, whichNonLin2,
+                whichNonLin3, whichNonLin4, whichNonLin5,
+                whichNonLin6, whichNonLin7, whichNonLin8,
+                whichNonLin9, whichNonLin10, whichNonLin11,
+                whichNonLin12, numLin)
+        pointsX = wrapper.getPointsX()
+        pointsY = wrapper.getPointsY()
+        calculated = True
+        length = len(pointsX)
+        # print len(pointsX)
+        for i in range(len(pointsX)):
+            prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
+        # Count the number of points near a hit point
+        hitNumberXY = defaultdict(int)
+        pointsXY = defaultdict(int)
+        for (a,b) in prePointsXY:
+            for j in range(colorInc):
+                for k in range(colorInc):
+                    hitNumberXY[((int)(a*width)+j,(int)(b*(height-100)+100+k))] +=1
+            pointsXY[((int)(a*width),(int)(b*(height-100)+100))] = 1
+        # print len(pointsXY.keys())
+        color = []
+        if len(hitNumberXY.values())!=0:
+            maxHit = max(hitNumberXY.values())
+            numberHits = range(maxHit)
+            for i in numberHits:
+                j = (float)(i+1)/(maxHit+1)/2+0.25
+                color.append((colorCon(j,1),
+                    colorCon(j,2),colorCon(j,3),j))
+        # We return a dictionary with point position as keys
+        # and color as value
+        results = {}
+        for (a,b) in pointsXY.keys():
+            results[(a,b)] = color[hitNumberXY[(a,b)]-1]
+        return results
+
+    def buttonAction(button, state):
+        state = 1 - state
+        if state==1:
+            button.bgcolor = GRAY
+        else:
+            button.bgcolor = LIGHTGRAY
+        return state
 
     # Set the height and width of the screen
     size=[width,height]
@@ -137,39 +179,48 @@ def main():
                 # if the user presses escape, quit the event loop.
                 if event.key == K_ESCAPE:
                     done=True
+                elif event.key == K_1:
+                    whichNonLin1 = buttonAction(button1,whichNonLin1)
+                elif event.key == K_2:
+                    whichNonLin2 = buttonAction(button2,whichNonLin2)
+                elif event.key == K_3:
+                    whichNonLin3 = buttonAction(button3,whichNonLin3)
+                elif event.key == K_4:
+                    whichNonLin4 = buttonAction(button4,whichNonLin4)
+                elif event.key == K_5:
+                    whichNonLin5 = buttonAction(button5,whichNonLin5)
+                elif event.key == K_6:
+                    whichNonLin6 = buttonAction(button6,whichNonLin6)
+                elif event.key == K_7:
+                    whichNonLin7 = buttonAction(button7,whichNonLin7)
+                elif event.key == K_8:
+                    whichNonLin8 = buttonAction(button8,whichNonLin8)
+                elif event.key == K_9:
+                    whichNonLin9 = buttonAction(button9,whichNonLin9)
+                elif event.key == K_0:
+                    whichNonLin10 = buttonAction(button10,whichNonLin10)
+                elif event.key == K_MINUS:
+                    whichNonLin11 = buttonAction(button11,whichNonLin11)
+                elif event.key == K_EQUALS:
+                    whichNonLin12 = buttonAction(button12,whichNonLin12)
+                elif event.key == K_RETURN:
+                    calculated=True
+                    pointToDraw = callWrapper(wrapper, N, whichNonLin1, whichNonLin2,
+                        whichNonLin3, whichNonLin4, whichNonLin5,
+                        whichNonLin6, whichNonLin7, whichNonLin8,
+                        whichNonLin9, whichNonLin10, whichNonLin11,
+                        whichNonLin12, numLin)
+
 
             if 'click' in buttonGo.handleEvent(event):
-                prePointsXY = []
-                wrapper.go(N, whichNonLin1, whichNonLin2,
+                calculated=True
+                pointToDraw = callWrapper(wrapper, N, whichNonLin1, whichNonLin2,
                     whichNonLin3, whichNonLin4, whichNonLin5,
                     whichNonLin6, whichNonLin7, whichNonLin8,
                     whichNonLin9, whichNonLin10, whichNonLin11,
                     whichNonLin12, numLin)
-                pointsX = wrapper.getPointsX()
-                pointsY = wrapper.getPointsY()
-                calculated = True
-                length = len(pointsX)
-                # print len(pointsX)
-                for i in range(len(pointsX)):
-                    prePointsXY.append( (pointsX[i]/4+0.5,pointsY[i]/4+0.5) )
-                    # Count the number of points
-                hitNumberXY = defaultdict(int)
-                pointsXY = defaultdict(int)
-                for (a,b) in prePointsXY:
-                    for j in range(colorInc):
-                        for k in range(colorInc):
-                            hitNumberXY[((int)(a*width)+j,(int)(b*(height-100)+100+k))] +=1
-                    pointsXY[((int)(a*width),(int)(b*(height-100)+100))] = 1
-                # print len(pointsXY.keys())
-                color = []
-                if len(hitNumberXY.values())!=0:
-                    maxHit = max(hitNumberXY.values())
-                    numberHits = range(maxHit)
-                    for i in numberHits:
-                        j = (float)(i+1)/(maxHit+1)/2+0.25
-                        color.append((colorCon(j,1),
-                            colorCon(j,2),colorCon(j,3),j))
 
+                
             if 'click' in buttonSave.handleEvent(event):
                 clicktime = (list)(gmtime())
                 filename = [save_dir]
@@ -180,77 +231,30 @@ def main():
 
             # Controls the behavior of the 12 buttons on non linear trans
             if 'click' in button1.handleEvent(event):
-                whichNonLin1 = 1 - whichNonLin1
-                if whichNonLin1==1:
-                    button1.bgcolor = GRAY
-                else:
-                    button1.bgcolor = LIGHTGRAY
+                whichNonLin1 = buttonAction(button1,whichNonLin1)
             if 'click' in button2.handleEvent(event):
-                whichNonLin2 = 1 - whichNonLin2
-                if whichNonLin2==1:
-                    button2.bgcolor = GRAY
-                else:
-                    button2.bgcolor = LIGHTGRAY
+                whichNonLin2 = buttonAction(button2,whichNonLin2)
             if 'click' in button3.handleEvent(event):
-                whichNonLin3 = 1 - whichNonLin3
-                if whichNonLin3==1:
-                    button3.bgcolor = GRAY
-                else:
-                    button3.bgcolor = LIGHTGRAY
+                whichNonLin3 = buttonAction(button3,whichNonLin3)
             if 'click' in button4.handleEvent(event):
-                whichNonLin4 = 1 - whichNonLin4
-                if whichNonLin4==1:
-                    button4.bgcolor = GRAY
-                else:
-                    button4.bgcolor = LIGHTGRAY
+                whichNonLin4 = buttonAction(button4,whichNonLin4)
             if 'click' in button5.handleEvent(event):
-                whichNonLin5 = 1 - whichNonLin5
-                if whichNonLin5==1:
-                    button5.bgcolor = GRAY
-                else:
-                    button5.bgcolor = LIGHTGRAY
+                whichNonLin5 = buttonAction(button5,whichNonLin5)
             if 'click' in button6.handleEvent(event):
-                whichNonLin6 = 1 - whichNonLin6
-                if whichNonLin6==1:
-                    button6.bgcolor = GRAY
-                else:
-                    button6.bgcolor = LIGHTGRAY
+                whichNonLin6 = buttonAction(button6,whichNonLin6)
             if 'click' in button7.handleEvent(event):
-                whichNonLin7 = 1 - whichNonLin7
-                if whichNonLin7==1:
-                    button7.bgcolor = GRAY
-                else:
-                    button7.bgcolor = LIGHTGRAY
+                whichNonLin7 = buttonAction(button7,whichNonLin7)
             if 'click' in button8.handleEvent(event):
-                whichNonLin8 = 1 - whichNonLin8
-                if whichNonLin8==1:
-                    button8.bgcolor = GRAY
-                else:
-                    button8.bgcolor = LIGHTGRAY
+                whichNonLin8 = buttonAction(button8,whichNonLin8)
             if 'click' in button9.handleEvent(event):
-                whichNonLin9 = 1 - whichNonLin9
-                if whichNonLin9==1:
-                    button9.bgcolor = GRAY
-                else:
-                    button9.bgcolor = LIGHTGRAY
+                whichNonLin9 = buttonAction(button9,whichNonLin9)
             if 'click' in button10.handleEvent(event):
-                whichNonLin10 = 1 - whichNonLin10
-                if whichNonLin10==1:
-                    button10.bgcolor = GRAY
-                else:
-                    button10.bgcolor = LIGHTGRAY
+                whichNonLin10 = buttonAction(button10,whichNonLin10)
             if 'click' in button11.handleEvent(event):
-                whichNonLin11 = 1 - whichNonLin11
-                if whichNonLin11==1:
-                    button11.bgcolor = GRAY
-                else:
-                    button11.bgcolor = LIGHTGRAY
+                whichNonLin11 = buttonAction(button11,whichNonLin11)
             if 'click' in button12.handleEvent(event):
-                whichNonLin12 = 1 - whichNonLin12
-                if whichNonLin12==1:
-                    button12.bgcolor = GRAY
-                else:
-                    button12.bgcolor = LIGHTGRAY
+                whichNonLin12 = buttonAction(button12,whichNonLin12)
+                
             if 'click' in btnumlin.handleEvent(event):
                 numLin = (int)(box_disp.test("number of linear"))
             if 'click' in btNsim.handleEvent(event):
@@ -301,19 +305,11 @@ def main():
             # # Draw points
             # drawnPoints = 0
             
-            screen.blit(font.render(str(len(pointsXY.keys())), 1, (255,255,255)),
+            screen.blit(font.render(str(len(pointToDraw.keys())), 1, (255,255,255)),
                 (390, 553))
-            for (a,b) in pointsXY.keys():
+            for (a,b) in pointToDraw.keys():
                 # drawnPoints +=1
-                pygame.draw.rect(screen,color[hitNumberXY[(a,b)]-1],[a,b,1,1],1)
-                # if drawnPoints >50000:
-                    # break
-            # for i in range(length):
-            #     j = (float)(i)/length
-            #     color = (colorCon(j,1),
-            #         colorCon(j,2),colorCon(j,3))
-            #     # print(color)
-            #     pygame.draw.rect(screen,color,[(int)((pointsX[i]/4+0.5)*width),(int)((pointsY[i]/4+0.5)*height),2,2])
+                pygame.draw.rect(screen,pointToDraw[(a,b)],[a,b,1,1],1)
 
      
         # Go ahead and update the screen with what we've drawn.
