@@ -82,11 +82,11 @@ void Parameters::update(std::vector<bool> whichNonLin, int numLin) {
     tmp.assign(5*numLin, 0);
     for (int i = 0; i<5*numLin; i++) tmp.at(i) = numty(rand()%RANGE)/RANGE;
     for (int i = 0; i<numLin; i++){
-        _preTrans[i].at(0) = (0.25+0.725*tmp.at(5*i))*cosf(tmp.at(5*i+2)*2*M_PI);
-        _preTrans[i].at(1) = -(0.25+0.725*tmp.at(5*i+1))*sinf(tmp.at(5*i+2)*2*M_PI);
+        _preTrans[i].at(0) = (1.5*tmp.at(5*i))*cosf(tmp.at(5*i+2)*2*M_PI);
+        _preTrans[i].at(1) = -(1.5*tmp.at(5*i+1))*sinf(tmp.at(5*i+2)*2*M_PI);
         _preTrans[i].at(2) = tmp.at(5*i+3);
-        _preTrans[i].at(3) = (0.25+0.725*tmp.at(5*i))*sinf(tmp.at(5*i+1)*2*M_PI);
-        _preTrans[i].at(4) = (0.25+0.725*tmp.at(5*i+1))*cosf(tmp.at(5*i+2)*2*M_PI);
+        _preTrans[i].at(3) = (1.5*tmp.at(5*i))*sinf(tmp.at(5*i+1)*2*M_PI);
+        _preTrans[i].at(4) = (1.5*tmp.at(5*i+1))*cosf(tmp.at(5*i+2)*2*M_PI);
         _preTrans[i].at(5) = tmp.at(5*i+4);
     }
 
