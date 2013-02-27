@@ -5,9 +5,9 @@ C++ project
 
 To launch the program, the python library "pygame" must first be installed. See http://www.pygame.org/download.shtml for more details.
 Once "pygame" is installed, the program can be launched by doing :
-  python Draw_tan.py
+  python launch.py
 
-The program has only been tested on Mac OS X 10.7 and 10.8. If it does not work, and if cython is installed, you can try 
+The program has only been tested on Mac OS X 10.7 and 10.8. If it does not work, and if cython (http://www.cython.org/) is installed, you can try 
  python setup.py build_ext --inplace 
 to compile the C++ program into a python class.
 
